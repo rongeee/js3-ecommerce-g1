@@ -1,12 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import ProductCard from "./ProductCard";
 
 const ProductList = () => {
   let [products, setProducts] = useState({});
-
-  Object.keys(products).map((key) => {
-    console.log(products[key])
-  })
 
   const PRODUCTS_URL =
     "https://mock-data-api.firebaseio.com/e-commerce/products.json";
@@ -17,9 +14,16 @@ const ProductList = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setProducts(data);
       });
+  };
+
+  const renderProductCard = () => {
+    return Object.keys(products).map((key) => {
+      const product = products[key];
+
+      return <ProductCard />;
+    });
   };
 
   useEffect(() => {
@@ -29,6 +33,7 @@ const ProductList = () => {
   return (
     <div>
       <h2>ProductList</h2>
+      {renderProductCard()}
     </div>
   );
 };
