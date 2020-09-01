@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 const ProductList = () => {
-  let [products, setProducts] = useState([]);
+  let [products, setProducts] = useState({});
 
   const PRODUCTS_URL =
     "https://mock-data-api.firebaseio.com/e-commerce/products.json";
