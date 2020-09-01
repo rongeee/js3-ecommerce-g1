@@ -1,7 +1,7 @@
-import React from "react";
-import ProductList from "./components/ProductList";
-import { Route, Switch } from "react-router-dom";
-import ProductDetailsPage from "./pages/ProductDetailsPage";
+import React from "react"
+import ProductList from "./components/ProductList"
+import { Route, Switch } from "react-router-dom"
+import ProductDetailsPage from "./pages/ProductDetailsPage"
 
 function App() {
   return (
@@ -9,19 +9,17 @@ function App() {
       <Switch>
         <Route
           path="/product-details/:id"
-          render={props => {
-            return <ProductDetailsPage {...props} />;
+          render={(props) => {
+            return <ProductDetailsPage {...props} />
           }}
         ></Route>
-        {/* <Route path="/product-details">
-          <ProductDetails />
-        </Route> */}
+
         <Route path="/">
           <ProductList />
         </Route>
       </Switch>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
