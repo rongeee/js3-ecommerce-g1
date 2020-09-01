@@ -1,5 +1,5 @@
 import React from "react";
-import ProductDetails from "./pages/ProductDetails";
+import ProductDetails from "./pages/ProductDetailsPage";
 import ProductList from "./components/ProductList";
 import { Route, Switch } from "react-router-dom";
 
