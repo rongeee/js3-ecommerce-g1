@@ -1,11 +1,12 @@
 import React from "react";
-import ProductDetail from "../components/ProductDetail";
+import ProductDetails from "../components/ProductDetails";
 
-const ProductDetailsPage = () => {
+const ProductDetailsPage = props => {
+  const productId = props.match.params.id;
+
   return (
     <div>
-      <h2>ProductDetails</h2>
-      <ProductDetail />
+      <ProductDetails productId={productId} />
     </div>
   );
 };

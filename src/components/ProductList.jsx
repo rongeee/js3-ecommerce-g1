@@ -1,8 +1,18 @@
 import React from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import ProductCard from "./ProductCard";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1em;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
 
 const ProductList = () => {
-  // let [products, setProducts] = useState({});
+  let [products, setProducts] = useState({});
 
   const PRODUCTS_URL =
     "https://mock-data-api.firebaseio.com/e-commerce/products.json";
@@ -13,20 +23,23 @@ const ProductList = () => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        // setProducts(data);
+        setProducts(data);
       });
+  };
+
+  const renderProductCard = () => {
+    return Object.keys(products).map((key) => {
+      const product = products[key];
+
+      return <ProductCard key={key} {...product} />;
+    });
   };
 
   useEffect(() => {
     getProducts();
   }, []);
 
-  return (
-    <div>
-      <h2>ProductList</h2>
-    </div>
-  );
+  return <Wrapper>{renderProductCard()}</Wrapper>;
 };
 
 export default ProductList;
