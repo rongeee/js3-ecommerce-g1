@@ -1,7 +1,6 @@
 import React from "react";
-import Index from "./pages/Index";
 import ProductDetails from "./pages/ProductDetails";
-import ProductList from "./pages/ProductList";
+import ProductList from "./components/ProductList";
 import { Route, Switch } from "react-router-dom";
 
 function App() {
@@ -11,11 +10,8 @@ function App() {
         <Route path="/product-details">
           <ProductDetails />
         </Route>
-        <Route path="/product-list">
-          <ProductList />
-        </Route>
         <Route path="/">
-          <Index />
+          <ProductList />
         </Route>
       </Switch>
     </div>
