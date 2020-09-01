@@ -4,6 +4,10 @@ import { useState, useEffect } from "react";
 const ProductList = () => {
   let [products, setProducts] = useState({});
 
+  Object.keys(products).map((key) => {
+    console.log(products[key])
+  })
+
   const PRODUCTS_URL =
     "https://mock-data-api.firebaseio.com/e-commerce/products.json";
 
