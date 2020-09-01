@@ -4,8 +4,6 @@ import styled from "styled-components";
 const Container = styled.div`
   border-radius: 7px;
   max-width: 400px;
-  margin-bottom: 1em;
-  padding: 40px;
   display: flex;
   flex-direction: column;
   box-shadow: 10px 10px 16px -15px rgba(0, 0, 0, 0.58);
@@ -17,6 +15,24 @@ const Header = styled.h2`
 `;
 const ImageWrapper = styled.div`
   display: flex;
+  max-height: 250px;
+  object-fit: cover;
+`;
+
+const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1em;
+  height: 100%;
+`;
+
+const Img = styled.img`
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 `;
 
 const Description = styled.p``;
@@ -63,25 +79,38 @@ export default function ProductCard({
     let ratingArr = [];
 
     for (let i = 0; i < rounded; i++) {
-      ratingArr.push(<span>★</span>);
+      ratingArr.push(<span key={i}>★</span>);
     }
-    return ratingArr;
+
+    return ratingArr < 1 ? (
+      <span key={0} style={{ color: "black" }}>
+        No Rating
+      </span>
+    ) : (
+      ratingArr
+    );
   };
 
   return (
     <Container>
       <ImageWrapper>
-        <img alt="" src={images[0].src.small}></img>
+        <Img
+          alt={images[0].alt}
+          src={images[0].src.small}
+          className="test"
+        ></Img>
       </ImageWrapper>
-      <RatingWrapper>{renderRatingStars()}</RatingWrapper>
-      <TextWrapper>
-        <Header>{name}</Header>
-        <Description>{description}</Description>
-      </TextWrapper>
-      <p>{price} SEK</p>
-      <Link href="#">
-        <Button>Add to Cart</Button>
-      </Link>
+      <InfoWrapper>
+        <RatingWrapper>{renderRatingStars()}</RatingWrapper>
+        <TextWrapper>
+          <Header>{name}</Header>
+          <Description>{description}</Description>
+        </TextWrapper>
+        <p>{price} SEK</p>
+        <Link href="#">
+          <Button>Add to Cart</Button>
+        </Link>
+      </InfoWrapper>
     </Container>
   );
 }
