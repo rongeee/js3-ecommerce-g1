@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import React from "react"
+import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 const Container = styled.div`
   border-radius: 7px;
@@ -8,19 +8,25 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 10px 10px 16px -15px rgba(0, 0, 0, 0.58);
-`;
+`
 
-const TextWrapper = styled.div``;
+const TextWrapper = styled.div`
+  max-height: 90px;
+  overflow: hidden;
+`
 const Header = styled.h2`
   font-size: 1.2rem;
-`;
+`
 const ImageWrapper = styled.div`
-  display: flex;
-  max-height: 250px;
-  object-fit: cover;
-`;
+  height: 280px;
+`
 
-const InfoWrapper = styled.div``;
+const InfoWrapper = styled.div`
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
+`
 
 const Img = styled.img`
   object-fit: cover;
@@ -28,20 +34,23 @@ const Img = styled.img`
   width: 100%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-`;
+`
 
-const Description = styled.p``;
+const Description = styled.p``
 
-const MyLink = styled.a`
+const MyLink = styled(Link)`
   align-self: center;
-`;
+  text-decoration: none;
+  font-weight: bold;
+  color: black;
+`
 
 const RatingWrapper = styled.div`
   display: flex;
   flex-direction: row;
   color: #edf906;
-  min-height: 20px;
-`;
+  height: 40px;
+`
 
 const Button = styled.button`
   background: #0f0f6d;
@@ -59,7 +68,7 @@ const Button = styled.button`
     border-radius: 10px;
     box-shadow: 0px 3px 7px #0000ff61;
   }
-`;
+`
 
 export default function ProductCard({
   description,
@@ -71,11 +80,11 @@ export default function ProductCard({
   stock,
 }) {
   const renderRatingStars = () => {
-    let rounded = Math.round(rating);
-    let ratingArr = [];
+    let rounded = Math.round(rating)
+    let ratingArr = []
 
     for (let i = 0; i < rounded; i++) {
-      ratingArr.push(<span key={i}>★</span>);
+      ratingArr.push(<span key={i}>★</span>)
     }
 
     return ratingArr < 1 ? (
@@ -84,24 +93,26 @@ export default function ProductCard({
       </span>
     ) : (
       ratingArr
-    );
-  };
+    )
+  }
+
+  console.log("hej")
 
   return (
     <Container>
-      <Link to={`/product-details/${id}`}>
-        <ImageWrapper>
-          <Img
-            alt={images[0].alt}
-            src={images[0].src.small}
-            className="test"
-          ></Img>
-        </ImageWrapper>
-      </Link>
+      <ImageWrapper>
+        <Img
+          alt={images[0].alt}
+          src={images[0].src.small}
+          className="test"
+        ></Img>
+      </ImageWrapper>
       <InfoWrapper>
         <RatingWrapper>{renderRatingStars()}</RatingWrapper>
         <TextWrapper>
-          <Header>{name}</Header>
+          <MyLink to={`/product-details/${id}`}>
+            <Header>{name}</Header>
+          </MyLink>
           <Description>{description}</Description>
         </TextWrapper>
         <p>{price} SEK</p>
@@ -110,5 +121,5 @@ export default function ProductCard({
         </MyLink>
       </InfoWrapper>
     </Container>
-  );
+  )
 }

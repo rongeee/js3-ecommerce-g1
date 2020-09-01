@@ -19,7 +19,7 @@ const ProductDetails = ({ productId }) => {
 
   useEffect(() => {
     fetchProduct();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
