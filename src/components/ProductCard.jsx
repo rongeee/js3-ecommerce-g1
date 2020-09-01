@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 const Container = styled.div`
   border-radius: 7px;
@@ -17,15 +18,9 @@ const ImageWrapper = styled.div`
   display: flex;
   max-height: 250px;
   object-fit: cover;
-`;
+`
 
-const InfoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1em;
-  height: 100%;
-`;
+const InfoWrapper = styled.div``
 
 const Img = styled.img`
   object-fit: cover;
@@ -33,11 +28,11 @@ const Img = styled.img`
   width: 100%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-`;
+`
 
-const Description = styled.p``;
+const Description = styled.p``
 
-const Link = styled.a`
+const MyLink = styled.a`
   align-self: center;
 `
 
@@ -45,6 +40,7 @@ const RatingWrapper = styled.div`
   display: flex;
   flex-direction: row;
   color: #edf906;
+  min-height: 20px;
 `
 
 const Button = styled.button`
@@ -79,7 +75,7 @@ export default function ProductCard({
     let ratingArr = []
 
     for (let i = 0; i < rounded; i++) {
-      ratingArr.push(<span key={i}>★</span>);
+      ratingArr.push(<span key={i}>★</span>)
     }
 
     return ratingArr < 1 ? (
@@ -88,31 +84,33 @@ export default function ProductCard({
       </span>
     ) : (
       ratingArr
-    );
-  };
+    )
+  }
 
   console.log("hej")
 
   return (
     <Container>
-      <ImageWrapper>
-        <Img
-          alt={images[0].alt}
-          src={images[0].src.small}
-          className="test"
-        ></Img>
-      </ImageWrapper>
-      <InfoWrapper>
-        <RatingWrapper>{renderRatingStars()}</RatingWrapper>
-        <TextWrapper>
-          <Header>{name}</Header>
-          <Description>{description}</Description>
-        </TextWrapper>
-        <p>{price} SEK</p>
-        <Link href="#">
-          <Button>Add to Cart</Button>
-        </Link>
-      </InfoWrapper>
+      <Link to={`/product-details/${id}`}>
+        <ImageWrapper>
+          <Img
+            alt={images[0].alt}
+            src={images[0].src.small}
+            className="test"
+          ></Img>
+        </ImageWrapper>
+        <InfoWrapper>
+          <RatingWrapper>{renderRatingStars()}</RatingWrapper>
+          <TextWrapper>
+            <Header>{name}</Header>
+            <Description>{description}</Description>
+          </TextWrapper>
+          <p>{price} SEK</p>
+          <MyLink href="#">
+            <Button>Add to Cart</Button>
+          </MyLink>
+        </InfoWrapper>
+      </Link>
     </Container>
   )
 }
