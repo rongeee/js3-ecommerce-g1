@@ -10,14 +10,14 @@ const ReviewList = ({ productId }) => {
     fetch(url)
       .then(res => res.json())
       .then(result => {
-        console.log(result);
+        // console.log(result);
         setReview(result);
       });
   };
 
   useEffect(() => {
     fetchReview();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div>
