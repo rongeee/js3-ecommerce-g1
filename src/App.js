@@ -6,7 +6,8 @@ import LayoutDefault from "./components/LayoutDefault"
 import { CartContext } from "./context/CartContext"
 
 function App() {
-  const [cart, setCart] = useState({})
+  const [cart, setCart] = useState([])
+  console.log(cart)
   return (
     <div>
       <Switch>
