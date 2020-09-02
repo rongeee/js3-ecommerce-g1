@@ -3,18 +3,18 @@ import styled from "styled-components"
 import { CartContext } from "../context/CartContext"
 
 export const AddButton = ({ myProps }) => {
-  const { setCart } = useContext(CartContext)
+  const { cart, setCart } = useContext(CartContext)
 
   const { id, name, price } = myProps
 
+  const setLocalStorage = () => {}
+
   const handleClick = () => {
     const product = { [id]: { name, price, qty: 1 } }
-
-    const productId = Object.keys(product)[0]
     setCart((prevState) => {
       return {
         ...prevState,
-        [productId]: { ...product },
+        [id]: { ...product },
       }
     })
   }
