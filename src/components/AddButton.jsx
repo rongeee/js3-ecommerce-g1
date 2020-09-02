@@ -11,7 +11,7 @@ export const AddButton = ({ myProps }) => {
 
   const addQty = () => {
     if (checkInStock()) {
-      setCart((prevState) => {
+      setCart(prevState => {
         return {
           ...prevState,
           [id]: { ...prevState[id], qty: prevState[id].qty++ },
@@ -36,7 +36,7 @@ export const AddButton = ({ myProps }) => {
     if (cart[id]) {
       addQty();
     } else {
-      setCart((prevState) => {
+      setCart(prevState => {
         return {
           ...prevState,
           [id]: { ...product[id] },
