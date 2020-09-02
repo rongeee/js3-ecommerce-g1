@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react"
+import styled from "styled-components"
+import { motion } from "framer-motion"
 
 const ReviewList = ({ productId }) => {
   // Need to make dynamic url (ID)
-  const url = `https://mock-data-api.firebaseio.com/e-commerce/reviews/${productId}.json`;
+  const url = `https://mock-data-api.firebaseio.com/e-commerce/reviews/${productId}.json`
 
-  const [review, setReview] = useState([]);
+  const [review, setReview] = useState([])
 
   const fetchReview = () => {
     fetch(url)
-      .then(res => res.json())
-      .then(result => {
-        // console.log(result);
-        setReview(result);
-      });
-  };
+      .then((res) => res.json())
+      .then((result) => {
+        setReview(result)
+      })
+  }
 
   useEffect(() => {
-    fetchReview();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    fetchReview()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const renderRatingStars = rating => {
-    let rounded = Math.round(rating);
-    let ratingArr = [];
+  const renderRatingStars = (rating) => {
+    let rounded = Math.round(rating)
+    let ratingArr = []
 
     for (let i = 0; i < rounded; i++) {
-      ratingArr.push(<Star key={i}>★</Star>);
+      ratingArr.push(<Star key={i}>★</Star>)
     }
 
-    return ratingArr < 1 ? <span key={0}>No Rating</span> : ratingArr;
-  };
+    return ratingArr < 1 ? <span key={0}>No Rating</span> : ratingArr
+  }
 
   return (
     <Container>
@@ -45,7 +44,6 @@ const ReviewList = ({ productId }) => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index - 0.7 }}
             >
-              {console.log(index)}
               <Top>
                 <Title>{item.title}</Title>
                 <p>{renderRatingStars(item.rating)}</p>
@@ -57,16 +55,16 @@ const ReviewList = ({ productId }) => {
                 <p>{item.date}</p>
               </Bot>
             </Review>
-          );
+          )
         })
       ) : (
         <p>No reviews</p>
       )}
     </Container>
-  );
-};
+  )
+}
 
-export default ReviewList;
+export default ReviewList
 
 const Container = styled(motion.div)`
   inline-size: 100%;
@@ -77,24 +75,24 @@ const Container = styled(motion.div)`
   * {
     margin: 0;
   }
-`;
+`
 const Review = styled(motion.div)`
   margin: 30px 0;
   background-color: #ececec;
   padding: 20px;
   border-radius: 10px;
-`;
+`
 const Title = styled.h4`
   margin: 0 0 20px;
   font-size: 20px;
-`;
+`
 const Top = styled.div`
   display: flex;
   justify-content: space-between;
-`;
+`
 const Star = styled.span`
   color: #e1a314;
-`;
+`
 const Bot = styled.div`
   display: flex;
   justify-content: space-between;
@@ -102,4 +100,4 @@ const Bot = styled.div`
   > p {
     font-weight: bold;
   }
-`;
+`
