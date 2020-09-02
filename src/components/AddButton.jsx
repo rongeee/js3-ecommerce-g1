@@ -31,7 +31,7 @@ export const AddButton = ({ myProps }) => {
   };
 
   const handleClick = () => {
-    const product = { [id]: { name, price, qty: 1 } };
+    const product = { [id]: { name, price, qty: 1, images } };
 
     if (cart[id]) {
       addQty();

@@ -1,8 +1,8 @@
-import React from "react"
-import styled from "styled-components"
-import { Link } from "react-router-dom"
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-import { AddButton } from "./AddButton"
+import { AddButton } from "./AddButton";
 
 export default function ProductCard({
   description,
@@ -14,11 +14,11 @@ export default function ProductCard({
   stock,
 }) {
   const renderRatingStars = () => {
-    let rounded = Math.round(rating)
-    let ratingArr = []
+    let rounded = Math.round(rating);
+    let ratingArr = [];
 
     for (let i = 0; i < rounded; i++) {
-      ratingArr.push(<span key={i}>★</span>)
+      ratingArr.push(<span key={i}>★</span>);
     }
 
     return ratingArr < 1 ? (
@@ -27,8 +27,8 @@ export default function ProductCard({
       </span>
     ) : (
       ratingArr
-    )
-  }
+    );
+  };
 
   return (
     <Container>
@@ -48,10 +48,12 @@ export default function ProductCard({
           <Description>{description}</Description>
         </TextWrapper>
         <p>{price} SEK</p>
-        <AddButton myProps={{ id, name, price, stock }}>Add to Cart</AddButton>
+        <AddButton myProps={{ id, name, price, stock, images: images[0] }}>
+          Add to Cart
+        </AddButton>
       </InfoWrapper>
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
@@ -60,25 +62,25 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 10px 10px 16px -15px rgba(0, 0, 0, 0.58);
-`
+`;
 
 const TextWrapper = styled.div`
   max-height: 90px;
   overflow: hidden;
-`
+`;
 const Header = styled.h2`
   font-size: 1.2rem;
-`
+`;
 const ImageWrapper = styled.div`
   height: 280px;
-`
+`;
 
 const InfoWrapper = styled.div`
   padding: 20px;
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-flow: row;
-`
+`;
 
 const Img = styled.img`
   object-fit: cover;
@@ -86,20 +88,20 @@ const Img = styled.img`
   width: 100%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-`
+`;
 
-const Description = styled.p``
+const Description = styled.p``;
 
 const MyLink = styled(Link)`
   align-self: center;
   text-decoration: none;
   font-weight: bold;
   color: black;
-`
+`;
 
 const RatingWrapper = styled.div`
   display: flex;
   flex-direction: row;
   color: #edf906;
   height: 40px;
-`
+`;
