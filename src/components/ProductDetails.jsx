@@ -10,11 +10,28 @@ const ProductDetails = ({ productId }) => {
 
   const fetchProduct = () => {
     fetch(url)
-      .then(res => res.json())
-      .then(result => {
+      .then((res) => res.json())
+      .then((result) => {
         // console.log(result);
         setProduct(result);
       });
+  };
+
+  const renderRatingStars = () => {
+    let rounded = Math.round(product.rating);
+    let ratingArr = [];
+
+    for (let i = 0; i < rounded; i++) {
+      ratingArr.push(<Star key={i}>★</Star>);
+    }
+
+    return ratingArr < 1 ? (
+      <span key={0} style={{ color: "black" }}>
+        No Rating
+      </span>
+    ) : (
+      ratingArr
+    );
   };
 
   useEffect(() => {
@@ -24,36 +41,35 @@ const ProductDetails = ({ productId }) => {
   return (
     <>
       <Card>
-        <h2>Product Detail </h2>
-        <ImgPlaceholder>
-          {product.images &&
-            product.images.map((item, index) => (
-              <Img
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 3 }}
-                style={{ backgroundImage: `url(${item.src.large})` }}
-                key={index}
-              />
-            ))}
-        </ImgPlaceholder>
-        <Title>{product.name}</Title>
-
-        <ProductInfo>
-          <Span>Rating:</Span> {product.rating}
-        </ProductInfo>
-        <ProductInfo>
-          <Span>Price:</Span> {product.price} SEK
-        </ProductInfo>
-        <p>Description: {product.description}</p>
-
+        {product.images &&
+          product.images.map((item, index) => (
+            <Img
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 3 }}
+              style={{ backgroundImage: `url(${item.src.large})` }}
+              key={index}
+            />
+          ))}
         <InfoWrapper>
+          <Title>{product.name}</Title>
+
+          <ProductInfo>
+            <Span>Rating:</Span>
+            {renderRatingStars()}
+          </ProductInfo>
+          <ProductInfo>
+            <Span>Price:</Span> {product.price} SEK
+          </ProductInfo>
+          <ProductInfo>
+            <p> {product.description}</p>
+          </ProductInfo>
           <ProductInfo>
             <Span>Stock:</Span> {product.stock} in stock.
           </ProductInfo>
-          <ProductInfo></ProductInfo>
+
+          <Btn>Add to cart</Btn>
         </InfoWrapper>
-        <Btn>Add to cart</Btn>
       </Card>
 
       <ReviewList productId={productId} />
@@ -65,21 +81,17 @@ export default ProductDetails;
 
 const Card = styled.div`
   inline-size: 100%;
-  max-inline-size: 800px;
-  block-size: 640px;
   margin: 0 auto;
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 100px;
   border-bottom: 1px solid #dadada;
 `;
-const Title = styled.h3``;
-const ImgPlaceholder = styled.div`
-  inline-size: 300px;
-  block-size: 300px;
+const Title = styled.h3`
+  font-size: 2em;
 `;
 const Img = styled(motion.div)`
   background-color: grey;
@@ -87,12 +99,14 @@ const Img = styled(motion.div)`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 8px;
-  block-size: 300px;
-  inline-size: 300px;
+  block-size: 400px;
+  inline-size: 500px;
 `;
 
 const InfoWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  padding-left: 3em;
 `;
 const Btn = styled.button`
   background: #0f0f6d;
@@ -103,7 +117,7 @@ const Btn = styled.button`
   transition: all 0.5s;
   border-radius: 10px;
   cursor: pointer;
-
+  width: 30%;
   &:hover {
     background: #2b2bff;
     transition: all 0.5s;
@@ -116,4 +130,7 @@ const Span = styled.span`
 `;
 const ProductInfo = styled.p`
   margin: 5px;
+`;
+const Star = styled.span`
+  color: #e1a314;
 `;

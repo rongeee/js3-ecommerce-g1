@@ -5,6 +5,8 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import LayoutDefault from "./components/LayoutDefault";
 import { CartContext } from "./context/CartContext";
 import ReceiptPage from "./pages/ReceiptPage";
+import CartPage from "./pages/CartPage";
+import styled from "styled-components";
 
 function App() {
   const [cart, setCart] = useState({});
@@ -22,7 +24,7 @@ function App() {
   }, [cart]);
 
   return (
-    <div>
+    <Div>
       <CartContext.Provider value={{ cart, setCart }}>
         <Switch>
           <Route
@@ -39,6 +41,11 @@ function App() {
           <Route path="/receipt">
             <ReceiptPage />
           </Route>
+          <Route path="/order">
+            <LayoutDefault>
+              <CartPage />
+            </LayoutDefault>
+          </Route>
 
           <Route path="/">
             <LayoutDefault>
@@ -47,8 +54,13 @@ function App() {
           </Route>
         </Switch>
       </CartContext.Provider>
-    </div>
+    </Div>
   );
 }
 
 export default App;
+
+const Div = styled.div`
+  font-family: sans-serif;
+  margin: 0;
+`;

@@ -61,9 +61,10 @@ const Container = styled.div`
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  box-shadow: 10px 10px 16px -15px rgba(0, 0, 0, 0.58);
+  box-shadow: 5px 5px 10px 5px rgba(189, 195, 199, 0.58);
 `;
-
+//box-shadow: 10px 10px 16px -15px rgba(0, 0, 0, 0.58);
+// box-shadow: 2px 2px 1px 2px rgba(202, 207, 210, 0.75);
 const TextWrapper = styled.div`
   max-height: 90px;
   overflow: hidden;

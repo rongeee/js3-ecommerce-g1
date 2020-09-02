@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
 import { CartItem } from "./CartItem";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const containerVariants = {
   initial: { opacity: 0, x: -200 },
@@ -49,6 +50,7 @@ export default function Cart() {
             </p>
           </div>
         </Wrapper>
+        <MyLinkButton to={`/order`}>Go to order page</MyLinkButton>
       </Container>
     </AnimatePresence>
   );
@@ -60,6 +62,15 @@ const Container = styled(motion.div)`
   border: 1px solid black;
   border-radius: 10px;
   overflow: scroll;
+`;
+const MyLinkButton = styled(Link)`
+  background-color: #2e86c1;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
 `;
 
 const Wrapper = styled.div``;
