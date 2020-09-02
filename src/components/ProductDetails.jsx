@@ -24,27 +24,38 @@ const ProductDetails = ({ productId }) => {
   return (
     <>
       <Card>
-        <h2>ProductDetails</h2>
-
-        {product.images &&
-          product.images.map((item, index) => (
-            <Img
-              initial={{ opacity: 0, y: -200 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 3 }}
-              style={{ backgroundImage: `url(${item.src.large})` }}
-              key={index}
-            />
-          ))}
+        <h2>Product Detail </h2>
+        <ImgPlaceholder>
+          {product.images &&
+            product.images.map((item, index) => (
+              <Img
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 3 }}
+                style={{ backgroundImage: `url(${item.src.large})` }}
+                key={index}
+              />
+            ))}
+        </ImgPlaceholder>
         <Title>{product.name}</Title>
+
+        <ProductInfo>
+          <Span>Rating:</Span> {product.rating}
+        </ProductInfo>
+        <ProductInfo>
+          <Span>Price:</Span> {product.price} SEK
+        </ProductInfo>
         <p>Description: {product.description}</p>
+
         <InfoWrapper>
-          <p>Price: {product.price} SEK</p>
-          <p>Stock: {product.stock} in stock.</p>
-          <p>Rating: {product.rating} Stars</p>
+          <ProductInfo>
+            <Span>Stock:</Span> {product.stock} in stock.
+          </ProductInfo>
+          <ProductInfo></ProductInfo>
         </InfoWrapper>
         <Btn>Add to cart</Btn>
       </Card>
+
       <ReviewList productId={productId} />
     </>
   );
@@ -55,24 +66,54 @@ export default ProductDetails;
 const Card = styled.div`
   inline-size: 100%;
   max-inline-size: 800px;
+  block-size: 640px;
   margin: 0 auto;
-
+  font-family: sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dadada;
 `;
 const Title = styled.h3``;
+const ImgPlaceholder = styled.div`
+  inline-size: 300px;
+  block-size: 300px;
+`;
 const Img = styled(motion.div)`
   background-color: grey;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
-  block-size: 200px;
-  inline-size: 200px;
+  border-radius: 8px;
+  block-size: 300px;
+  inline-size: 300px;
 `;
+
 const InfoWrapper = styled.div`
   display: flex;
 `;
-const Btn = styled.button``;
+const Btn = styled.button`
+  background: #0f0f6d;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 1em;
+  border: 0;
+  transition: all 0.5s;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    background: #2b2bff;
+    transition: all 0.5s;
+    border-radius: 10px;
+    box-shadow: 0px 3px 7px #0000ff61;
+  }
+`;
+const Span = styled.span`
+  font-weight: bold;
+`;
+const ProductInfo = styled.p`
+  margin: 5px;
+`;
