@@ -3,18 +3,25 @@ import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
 
 export const AddButton = ({ myProps }) => {
-  const { setCart } = useContext(CartContext);
+  const { cart, setCart } = useContext(CartContext);
 
   const { id, name, price } = myProps;
 
+  const addQty = () => {};
+
   const handleClick = () => {
     const product = { [id]: { name, price, qty: 1 } };
-    setCart(prevState => {
-      return {
-        ...prevState,
-        [id]: { ...product },
-      };
-    });
+
+    if (cart[id]) {
+      addQty();
+    } else {
+      setCart(prevState => {
+        return {
+          ...prevState,
+          [id]: { ...product[id] },
+        };
+      });
+    }
   };
   return <Btn onClick={handleClick}>add to cart</Btn>;
 };

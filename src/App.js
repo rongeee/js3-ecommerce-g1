@@ -37,9 +37,7 @@ function App() {
           ></Route>
 
           <Route path="/receipt">
-            <LayoutDefault>
-              <ReceiptPage />
-            </LayoutDefault>
+            <ReceiptPage />
           </Route>
 
           <Route path="/">
