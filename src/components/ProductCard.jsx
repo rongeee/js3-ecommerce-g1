@@ -1,6 +1,8 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import { CartContext } from "../context/CartContext"
+import { AddButton } from "./AddButton"
 
 const Container = styled.div`
   border-radius: 7px;
@@ -52,24 +54,6 @@ const RatingWrapper = styled.div`
   height: 40px;
 `
 
-const Button = styled.button`
-  background: #0f0f6d;
-  color: #ffffff;
-  font-size: 1rem;
-  padding: 1em;
-  border: 0;
-  transition: all 0.5s;
-  border-radius: 10px;
-  cursor: pointer;
-
-  &:hover {
-    background: #2b2bff;
-    transition: all 0.5s;
-    border-radius: 10px;
-    box-shadow: 0px 3px 7px #0000ff61;
-  }
-`
-
 export default function ProductCard({
   description,
   id,
@@ -96,6 +80,8 @@ export default function ProductCard({
     )
   }
 
+  const { cart, setCart } = useContext(CartContext)
+
   console.log("hej")
 
   return (
@@ -116,9 +102,7 @@ export default function ProductCard({
           <Description>{description}</Description>
         </TextWrapper>
         <p>{price} SEK</p>
-        <MyLink href="#">
-          <Button>Add to Cart</Button>
-        </MyLink>
+        <AddButton myProps={{ id, name, price, stock }}>Add to Cart</AddButton>
       </InfoWrapper>
     </Container>
   )

@@ -1,21 +1,24 @@
-import React from 'react'
+import React from "react"
+import Cart from "./Cart"
 
-const LayoutDefault = ({children}) => {
+const LayoutDefault = ({ children }) => {
   return (
     <div>
       <header>
         <nav>
           <div className="logo-wrapper">
-            <img alt="Logo" src=""/>
+            <img alt="Logo" src="" />
           </div>
           <div className="cart-btn-wrapper">
-            <img alt="cart" src=""/>
+            <img alt="cart" src="" />
           </div>
         </nav>
       </header>
+      <Cart></Cart>
       {children}
       <footer>
-        <ul>Footer
+        <ul>
+          Footer
           <li>rad1</li>
           <li>rad2</li>
           <li>rad3</li>
@@ -25,4 +28,4 @@ const LayoutDefault = ({children}) => {
   )
 }
 
-export default LayoutDefault;
+export default LayoutDefault
