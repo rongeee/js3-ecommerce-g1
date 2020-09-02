@@ -4,10 +4,11 @@ import { Route, Switch } from "react-router-dom";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import LayoutDefault from "./components/LayoutDefault";
 import { CartContext } from "./context/CartContext";
+import ReceiptPage from "./pages/ReceiptPage";
 
 function App() {
   const [cart, setCart] = useState({});
-  console.log(cart);
+  // console.log(cart);
 
   useEffect(() => {
     const storageCart = JSON.parse(localStorage.getItem("cart"));
@@ -34,6 +35,10 @@ function App() {
               );
             }}
           ></Route>
+
+          <Route path="/receipt">
+            <ReceiptPage />
+          </Route>
 
           <Route path="/">
             <LayoutDefault>

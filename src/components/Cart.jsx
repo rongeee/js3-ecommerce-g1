@@ -1,36 +1,67 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
-import Order from "./Order";
+import { CartItem } from "./CartItem";
+import { motion, AnimatePresence } from "framer-motion";
+
+const containerVariants = {
+  initial: { opacity: 0, x: -200 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: -200 },
+};
 
 export default function Cart() {
-  const [isHidden, setIsHidden] = useState(false);
-
   const { cart } = useContext(CartContext);
 
   useEffect(() => {}, [cart]);
 
-  const handleClick = () => {
-    setIsHidden(!isHidden);
+  const getTotalCartPrice = () => {
+    const cartArr = Object.keys(cart);
+    let totalPrice = 0;
+
+    cartArr.forEach((key) => {
+      totalPrice += cart[key].qty * cart[key].price;
+    });
+
+    return totalPrice + " SEK";
   };
   const renderItems = () => {
     return Object.keys(cart).map((item) => {
-      return <div key={item}>{item}</div>;
+      return <CartItem product={cart[item]} />;
     });
   };
+
   return (
-    <Container onClick={handleClick}>
-      <Wrapper>{renderItems()}</Wrapper>
-      <Order />
-    </Container>
+    <AnimatePresence exitBeforeEnter>
+      <Container
+        variants={containerVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
+        <Wrapper>
+          {renderItems()}
+          <div>
+            <p>
+              {Object.entries(cart).length > 0
+                ? getTotalCartPrice()
+                : "Empty Cart"}
+            </p>
+          </div>
+        </Wrapper>
+      </Container>
+    </AnimatePresence>
   );
 }
 
-const Container = styled.div`
-  height: 400px;
+const Container = styled(motion.div)`
   width: 400px;
+  max-height: 500px;
   border: 1px solid black;
+  border-radius: 10px;
+  overflow: scroll;
 `;
+
 const Wrapper = styled.div``;
 const Item = styled.div``;
 const Img = styled.div``;

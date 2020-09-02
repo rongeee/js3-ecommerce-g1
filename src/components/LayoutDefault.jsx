@@ -1,7 +1,15 @@
-import React from "react"
-import Cart from "./Cart"
+import React from "react";
+import Cart from "./Cart";
+import { useState } from "react";
+import styled from "styled-components";
 
 const LayoutDefault = ({ children }) => {
+  const [isHidden, setIsHidden] = useState(true);
+
+  const handleClick = () => {
+    setIsHidden(!isHidden);
+  };
+
   return (
     <div>
       <header>
@@ -9,12 +17,12 @@ const LayoutDefault = ({ children }) => {
           <div className="logo-wrapper">
             <img alt="Logo" src="" />
           </div>
-          <div className="cart-btn-wrapper">
-            <img alt="cart" src="" />
+          <div onClick={handleClick} className="cart-btn-wrapper">
+            <p>Open Cart</p>
           </div>
         </nav>
       </header>
-      <Cart></Cart>
+      {!isHidden && <Cart />}
       {children}
       <footer>
         <ul>
@@ -25,7 +33,11 @@ const LayoutDefault = ({ children }) => {
         </ul>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default LayoutDefault
+export default LayoutDefault;
+
+// const Cart = styled.div`
+//   display: ${(isHidden) => (isHidden ? "block" : "none")};
+// `;
