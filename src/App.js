@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react"
-import ProductList from "./components/ProductList"
-import { Route, Switch } from "react-router-dom"
-import ProductDetailsPage from "./pages/ProductDetailsPage"
-import LayoutDefault from "./components/LayoutDefault"
-import { CartContext } from "./context/CartContext"
+import React, { useState, useEffect } from "react";
+import ProductList from "./components/ProductList";
+import { Route, Switch } from "react-router-dom";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import LayoutDefault from "./components/LayoutDefault";
+import { CartContext } from "./context/CartContext";
 
 function App() {
-  const [cart, setCart] = useState({})
-  console.log(cart)
+  const [cart, setCart] = useState({});
+  console.log(cart);
 
   useEffect(() => {
-    const storageCart = JSON.parse(localStorage.getItem("cart"))
+    const storageCart = JSON.parse(localStorage.getItem("cart"));
     if (storageCart) {
-      setCart(storageCart)
+      setCart(storageCart);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
-  }, [cart])
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <div>
-      <Switch>
-        <CartContext.Provider value={{ cart, setCart }}>
+      <CartContext.Provider value={{ cart, setCart }}>
+        <Switch>
           <Route
             path="/product-details/:id"
             render={(props) => {
@@ -31,7 +31,7 @@ function App() {
                 <LayoutDefault>
                   <ProductDetailsPage {...props} />
                 </LayoutDefault>
-              )
+              );
             }}
           ></Route>
 
@@ -40,10 +40,10 @@ function App() {
               <ProductList />
             </LayoutDefault>
           </Route>
-        </CartContext.Provider>
-      </Switch>
+        </Switch>
+      </CartContext.Provider>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
