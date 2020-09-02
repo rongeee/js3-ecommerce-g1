@@ -10,8 +10,8 @@ const ProductDetails = ({ productId }) => {
 
   const fetchProduct = () => {
     fetch(url)
-      .then((res) => res.json())
-      .then((result) => {
+      .then(res => res.json())
+      .then(result => {
         // console.log(result);
         setProduct(result);
       });
@@ -25,17 +25,18 @@ const ProductDetails = ({ productId }) => {
     <>
       <Card>
         <h2>Product Detail </h2>
-        {product.images &&
-          product.images.map((item, index) => (
-            <Img
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 3 }}
-              style={{ backgroundImage: `url(${item.src.large})` }}
-              key={index}
-            />
-          ))}
-
+        <ImgPlaceholder>
+          {product.images &&
+            product.images.map((item, index) => (
+              <Img
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 3 }}
+                style={{ backgroundImage: `url(${item.src.large})` }}
+                key={index}
+              />
+            ))}
+        </ImgPlaceholder>
         <Title>{product.name}</Title>
 
         <ProductInfo>
@@ -65,6 +66,7 @@ export default ProductDetails;
 const Card = styled.div`
   inline-size: 100%;
   max-inline-size: 800px;
+  block-size: 640px;
   margin: 0 auto;
   font-family: sans-serif;
   display: flex;
@@ -75,6 +77,10 @@ const Card = styled.div`
   border-bottom: 1px solid #dadada;
 `;
 const Title = styled.h3``;
+const ImgPlaceholder = styled.div`
+  inline-size: 300px;
+  block-size: 300px;
+`;
 const Img = styled(motion.div)`
   background-color: grey;
   background-position: center;
