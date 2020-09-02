@@ -8,7 +8,7 @@ import ReceiptPage from "./pages/ReceiptPage";
 
 function App() {
   const [cart, setCart] = useState({});
-  console.log(cart);
+  // console.log(cart);
 
   useEffect(() => {
     const storageCart = JSON.parse(localStorage.getItem("cart"));

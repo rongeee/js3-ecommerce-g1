@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ReceiptList from "../components/ReceiptList";
+import Coupons from "../components/Coupons";
 
 const ReceiptPage = () => {
   return (
@@ -10,6 +11,7 @@ const ReceiptPage = () => {
         <ReceiptList />
         <p>Total price</p>
         <button>Continue shopping</button>
+        <Coupons />
       </Wrapper>
     </div>
   );
