@@ -4,10 +4,12 @@ import { CartContext } from "../context/CartContext"
 export default function Cart() {
   const [isHidden, setIsHidden] = useState(false)
 
-  const { cart, setCart } = useContext(CartContext)
+  const { cart } = useContext(CartContext)
 
   useEffect(() => {}, [cart])
 
-  const handleClick = () => {}
+  const handleClick = () => {
+    setIsHidden(!isHidden)
+  }
   return <div onClick={handleClick}>I am the cart</div>
 }

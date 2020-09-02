@@ -3,9 +3,9 @@ import styled from "styled-components"
 import { CartContext } from "../context/CartContext"
 
 export const AddButton = ({ myProps }) => {
-  const { cart, setCart } = useContext(CartContext)
+  const { setCart } = useContext(CartContext)
 
-  const { id, name, price, stock } = myProps
+  const { id, name, price } = myProps
 
   const handleClick = () => {
     const product = { [id]: { name, price, qty: 1 } }

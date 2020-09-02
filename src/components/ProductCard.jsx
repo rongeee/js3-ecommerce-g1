@@ -1,8 +1,58 @@
-import React, { useContext } from "react"
+import React from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
-import { CartContext } from "../context/CartContext"
+
 import { AddButton } from "./AddButton"
+
+export default function ProductCard({
+  description,
+  id,
+  images,
+  name,
+  price,
+  rating,
+  stock,
+}) {
+  const renderRatingStars = () => {
+    let rounded = Math.round(rating)
+    let ratingArr = []
+
+    for (let i = 0; i < rounded; i++) {
+      ratingArr.push(<span key={i}>★</span>)
+    }
+
+    return ratingArr < 1 ? (
+      <span key={0} style={{ color: "black" }}>
+        No Rating
+      </span>
+    ) : (
+      ratingArr
+    )
+  }
+
+  return (
+    <Container>
+      <ImageWrapper>
+        <Img
+          alt={images[0].alt}
+          src={images[0].src.small}
+          className="test"
+        ></Img>
+      </ImageWrapper>
+      <InfoWrapper>
+        <RatingWrapper>{renderRatingStars()}</RatingWrapper>
+        <TextWrapper>
+          <MyLink to={`/product-details/${id}`}>
+            <Header>{name}</Header>
+          </MyLink>
+          <Description>{description}</Description>
+        </TextWrapper>
+        <p>{price} SEK</p>
+        <AddButton myProps={{ id, name, price, stock }}>Add to Cart</AddButton>
+      </InfoWrapper>
+    </Container>
+  )
+}
 
 const Container = styled.div`
   border-radius: 7px;
@@ -53,57 +103,3 @@ const RatingWrapper = styled.div`
   color: #edf906;
   height: 40px;
 `
-
-export default function ProductCard({
-  description,
-  id,
-  images,
-  name,
-  price,
-  rating,
-  stock,
-}) {
-  const renderRatingStars = () => {
-    let rounded = Math.round(rating)
-    let ratingArr = []
-
-    for (let i = 0; i < rounded; i++) {
-      ratingArr.push(<span key={i}>★</span>)
-    }
-
-    return ratingArr < 1 ? (
-      <span key={0} style={{ color: "black" }}>
-        No Rating
-      </span>
-    ) : (
-      ratingArr
-    )
-  }
-
-  const { cart, setCart } = useContext(CartContext)
-
-  console.log("hej")
-
-  return (
-    <Container>
-      <ImageWrapper>
-        <Img
-          alt={images[0].alt}
-          src={images[0].src.small}
-          className="test"
-        ></Img>
-      </ImageWrapper>
-      <InfoWrapper>
-        <RatingWrapper>{renderRatingStars()}</RatingWrapper>
-        <TextWrapper>
-          <MyLink to={`/product-details/${id}`}>
-            <Header>{name}</Header>
-          </MyLink>
-          <Description>{description}</Description>
-        </TextWrapper>
-        <p>{price} SEK</p>
-        <AddButton myProps={{ id, name, price, stock }}>Add to Cart</AddButton>
-      </InfoWrapper>
-    </Container>
-  )
-}

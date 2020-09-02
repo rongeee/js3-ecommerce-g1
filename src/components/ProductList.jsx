@@ -3,14 +3,6 @@ import { useState, useEffect } from "react"
 import ProductCard from "./ProductCard"
 import styled from "styled-components"
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1em;
-  max-width: 1200px;
-  margin: 0 auto;
-`
-
 const ProductList = () => {
   let [products, setProducts] = useState({})
 
@@ -30,7 +22,6 @@ const ProductList = () => {
   const renderProductCard = () => {
     return Object.keys(products).map((key) => {
       const product = products[key]
-
       return <ProductCard key={key} {...product} />
     })
   }
@@ -43,3 +34,11 @@ const ProductList = () => {
 }
 
 export default ProductList
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1em;
+  max-width: 1200px;
+  margin: 0 auto;
+`

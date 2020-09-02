@@ -7,7 +7,7 @@ import { CartContext } from "./context/CartContext"
 
 function App() {
   const [cart, setCart] = useState([])
-  console.log(cart)
+
   return (
     <div>
       <Switch>
