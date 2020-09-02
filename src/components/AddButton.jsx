@@ -5,9 +5,30 @@ import { CartContext } from "../context/CartContext";
 export const AddButton = ({ myProps }) => {
   const { cart, setCart } = useContext(CartContext);
 
-  const { id, name, price } = myProps;
+  const { id, name, price, stock, images } = myProps;
 
-  const addQty = () => {};
+  const setLocalStorage = () => {};
+
+  const addQty = () => {
+    if (checkInStock()) {
+      setCart(prevState => {
+        return {
+          ...prevState,
+          [id]: { ...prevState[id], qty: prevState[id].qty++ },
+        };
+      });
+    }
+  };
+
+  const checkInStock = () => {
+    console.log(cart[id].qty);
+    if (cart[id].qty <= stock) {
+      return true;
+    } else {
+      console.log("TOO MANY");
+      return false;
+    }
+  };
 
   const handleClick = () => {
     const product = { [id]: { name, price, qty: 1 } };
