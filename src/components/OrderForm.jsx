@@ -3,7 +3,7 @@ import { useContext, useRef } from "react";
 import { CartContext } from "../context/CartContext";
 import styled from "styled-components";
 
-const Order = () => {
+const OrderForm = () => {
   const { cart, setCart } = useContext(CartContext);
   const userInput = useRef();
   const discountInput = useRef();
@@ -47,7 +47,7 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default OrderForm;
 const InputWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;

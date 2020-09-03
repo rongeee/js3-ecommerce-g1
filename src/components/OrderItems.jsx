@@ -9,7 +9,7 @@ const OrderItems = ({ product }) => {
 
     return price * qty;
   };
-  console.log(product);
+
   return (
     <div>
       <Container>

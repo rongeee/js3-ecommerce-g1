@@ -26,6 +26,7 @@ export default function Cart() {
 
     return totalPrice + " SEK";
   };
+
   const renderItems = () => {
     return Object.keys(cart).map((item) => {
       return <CartItem product={cart[item]} />;

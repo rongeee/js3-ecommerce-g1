@@ -1,7 +1,9 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
-const Coupons = ({}) => {
+const Coupons = ({ setDiscountPrice, totalPrice }) => {
   const [coupons, setCoupons] = useState({});
+  const { cart } = useContext(CartContext);
   const url =
     "https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json";
 
@@ -9,8 +11,8 @@ const Coupons = ({}) => {
 
   const fetchCoupons = () => {
     fetch(url)
-      .then(res => res.json())
-      .then(result => {
+      .then((res) => res.json())
+      .then((result) => {
         setCoupons(result);
         // console.log(result);
       });
@@ -23,22 +25,18 @@ const Coupons = ({}) => {
   let couponsArr = [];
   const checkCoupons = () => {
     couponsArr = [];
-    Object.keys(coupons).map(item => couponsArr.push(item));
+    Object.keys(coupons).map((item) => couponsArr.push(item));
 
-    couponsArr.find(coupon => {
+    couponsArr.find((coupon) => {
       if (coupon === couponCode.current.value) {
         return giveDiscount(couponCode.current.value);
       }
     });
   };
 
-  const giveDiscount = currentCoupon => {
-    let totalPrice = 1000;
-
-    totalPrice = totalPrice * coupons[currentCoupon].discount;
-
-    console.log(totalPrice);
-    return totalPrice;
+  const giveDiscount = (currentCoupon) => {
+    let tempPrice = Math.round(totalPrice * coupons[currentCoupon].discount);
+    setDiscountPrice(tempPrice);
   };
 
   // console.log(coupons);

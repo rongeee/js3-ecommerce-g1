@@ -5,7 +5,7 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import LayoutDefault from "./components/LayoutDefault";
 import { CartContext } from "./context/CartContext";
 import ReceiptPage from "./pages/ReceiptPage";
-import CartPage from "./pages/CartPage";
+import OrderPage from "./pages/OrderPage";
 import styled from "styled-components";
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
           </Route>
           <Route path="/order">
             <LayoutDefault>
-              <CartPage />
+              <OrderPage />
             </LayoutDefault>
           </Route>
 
