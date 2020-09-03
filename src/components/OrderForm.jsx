@@ -28,7 +28,6 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
       .then((data) => {
         console.log(data);
         setCart({});
-        localStorage.clear();
       });
   }
   return (
