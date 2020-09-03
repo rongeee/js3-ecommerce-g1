@@ -1,15 +1,16 @@
-import React, { useContext, useEffect } from "react";
-import styled from "styled-components";
-import { CartContext } from "../context/CartContext";
-import { CartItem } from "./CartItem";
-import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react"
+import styled from "styled-components"
+import { CartContext } from "../context/CartContext"
+import { CartItem } from "./CartItem"
+import { motion, AnimatePresence } from "framer-motion"
+import { Link } from "react-router-dom"
+import CartClearCart from "./CartClearCart"
 
 const containerVariants = {
   initial: { opacity: 0, x: "100%" },
   animate: { opacity: 1, x: 0, transition: { type: "tween" } },
   exit: { opacity: 0, x: "100%", transition: { type: "tween" } },
-};
+}
 
 export default function Cart() {
   const { cart } = useContext(CartContext)
@@ -24,8 +25,8 @@ export default function Cart() {
       totalPrice += cart[key].qty * cart[key].price
     })
 
-    return totalPrice + " SEK";
-  };
+    return totalPrice + " SEK"
+  }
 
   const renderItems = () => {
     return Object.keys(cart).map((item) => {
@@ -56,6 +57,7 @@ export default function Cart() {
         ) : (
           <MyLinkButton inactive={true}>Go to order page</MyLinkButton>
         )}
+        <CartClearCart />
       </Container>
     </AnimatePresence>
   )
@@ -76,7 +78,7 @@ const Container = styled(motion.div)`
   @media (min-width: 800px) {
     width: 400px;
   }
-`;
+`
 const MyLinkButton = styled(Link)`
   background-color: #2e86c1;
   color: white;
@@ -85,7 +87,7 @@ const MyLinkButton = styled(Link)`
   text-decoration: none;
   display: inline-block;
   border-radius: 5px;
-`;
+`
 
 const Wrapper = styled.div``
 const Item = styled.div``
