@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
-import styled from "styled-components";
-import { CartContext } from "../context/CartContext";
-import { addQty } from "../cart.utils";
+import React, { useContext } from "react"
+import styled from "styled-components"
+import { CartContext } from "../context/CartContext"
+import { addQty, addToCart } from "../cart.utils"
 
 export const AddButton = ({ myProps }) => {
   const { cart, setCart } = useContext(CartContext);
@@ -14,12 +14,7 @@ export const AddButton = ({ myProps }) => {
     if (cart[id]) {
       addQty(cart, setCart, id, stock, 1);
     } else {
-      setCart((prevState) => {
-        return {
-          ...prevState,
-          [id]: { ...product[id], id, stock },
-        };
-      });
+      addToCart(setCart, product, id, stock)
     }
   };
   return <Btn onClick={handleClick}>Add to cart</Btn>;

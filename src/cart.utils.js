@@ -16,3 +16,12 @@ export const deleteProduct = (setCart, productId) => {
     }
   })
 }
+
+export const addToCart = (setCart, product, id, stock) => {
+  setCart((prevState) => {
+    return {
+      ...prevState,
+      [id]: { ...product[id], id, stock },
+    }
+  })
+}
