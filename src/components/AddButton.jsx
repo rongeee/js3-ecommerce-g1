@@ -52,6 +52,7 @@ const Btn = styled.button`
   background: #0f0f6d;
   color: #ffffff;
   font-size: 1rem;
+  font-weight: bold;
   padding: 1em;
   border: 0;
   transition: all 0.2s;

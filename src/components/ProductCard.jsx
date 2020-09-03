@@ -4,11 +4,6 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { AddButton } from "./AddButton";
 
-const cardVariants = {
-  initial: { y: 200 },
-  animate: { y: 0, transition: { delay: 0.15 } },
-};
-
 export default function ProductCard({
   description,
   id,
@@ -17,6 +12,7 @@ export default function ProductCard({
   price,
   rating,
   stock,
+  variants,
 }) {
   const renderRatingStars = () => {
     let rounded = Math.round(rating);
@@ -36,7 +32,7 @@ export default function ProductCard({
   };
 
   return (
-    <Container variants={cardVariants} initial="initial" animate="animate">
+    <Container variants={variants}>
       <MyLink to={`/product-details/${id}`}>
         <ImageWrapper>
           <Img

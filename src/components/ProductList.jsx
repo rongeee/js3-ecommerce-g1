@@ -11,10 +11,13 @@ const listVariants = {
     transition: {
       delay: 0.4,
       duration: 0.2,
-      delayChildren: 4,
-      staggerChildren: 1,
+      staggerChildren: 0.1,
     },
   },
+};
+const childVariants = {
+  initial: { y: 200 },
+  animate: { y: 0, transition: { delay: 0.15 } },
 };
 
 const ProductList = () => {
@@ -36,7 +39,7 @@ const ProductList = () => {
   const renderProductCard = () => {
     return Object.keys(products).map(key => {
       const product = products[key];
-      return <ProductCard key={key} {...product} />;
+      return <ProductCard key={key} {...product} variants={childVariants} />;
     });
   };
 

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CartIkon from "./images/cart.png";
 
 const LayoutDefault = ({ children }) => {
-  const [isHidden, setIsHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(true);
 
   const handleClick = () => {
     setIsHidden(!isHidden);
