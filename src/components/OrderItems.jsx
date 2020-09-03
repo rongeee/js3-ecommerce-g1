@@ -11,25 +11,22 @@ const OrderItems = ({ product }) => {
   };
 
   return (
-    <div>
-      <Container>
-        <ImageWrapper>
-          <ProductImage
-            src={product.images.src.small}
-            alt={product.images.alt}
-          ></ProductImage>
-        </ImageWrapper>
+    <Container>
+      <ImageWrapper>
+        <ProductImage
+          src={product.images.src.small}
+          alt={product.images.alt}
+        ></ProductImage>
+      </ImageWrapper>
 
-        <ProductInfo>
-          <h4>{product.name}</h4>
+      <ProductInfo>
+        <h4>{product.name}</h4>
 
-          <p>
-            Amount: {product.qty} x {product.price} SEK
-          </p>
-        </ProductInfo>
-      </Container>
-      {/* <p>{getTotalPrice()} SEK</p> */}
-    </div>
+        <p>
+          Amount: {product.qty} x {product.price} SEK
+        </p>
+      </ProductInfo>
+    </Container>
   );
 };
 
