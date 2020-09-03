@@ -12,26 +12,26 @@ const containerVariants = {
 };
 
 export default function Cart() {
-  const { cart } = useContext(CartContext);
+  const { cart } = useContext(CartContext)
 
-  useEffect(() => {}, [cart]);
+  useEffect(() => {}, [cart])
 
   const getTotalCartPrice = () => {
-    const cartArr = Object.keys(cart);
-    let totalPrice = 0;
+    const cartArr = Object.keys(cart)
+    let totalPrice = 0
 
     cartArr.forEach((key) => {
-      totalPrice += cart[key].qty * cart[key].price;
-    });
+      totalPrice += cart[key].qty * cart[key].price
+    })
 
     return totalPrice + " SEK";
   };
 
   const renderItems = () => {
     return Object.keys(cart).map((item) => {
-      return <CartItem product={cart[item]} />;
-    });
-  };
+      return <CartItem product={cart[item]} />
+    })
+  }
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -58,7 +58,7 @@ export default function Cart() {
         )}
       </Container>
     </AnimatePresence>
-  );
+  )
 }
 
 const Container = styled(motion.div)`
@@ -87,6 +87,6 @@ const MyLinkButton = styled(Link)`
   border-radius: 5px;
 `;
 
-const Wrapper = styled.div``;
-const Item = styled.div``;
-const Img = styled.div``;
+const Wrapper = styled.div``
+const Item = styled.div``
+const Img = styled.div``
