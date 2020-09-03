@@ -21,7 +21,6 @@ export const CartItem = ({ product }) => {
         ></ProductImage>
       </ImageWrapper>
       <ProductInfo>
-        <CartQtyBtn value={1} product={product} action={"+"} />
         <h4>{product.name}</h4>
         <PriceInfo>
           <p>
@@ -30,7 +29,10 @@ export const CartItem = ({ product }) => {
 
           <p>{getTotalPrice()} SEK</p>
         </PriceInfo>
-        <CartQtyBtn value={-1} product={product} action={"-"} />
+        <QtyContainer>
+          <CartQtyBtn value={-1} product={product} action={"-"} />
+          <CartQtyBtn value={1} product={product} action={"+"} />
+        </QtyContainer>
       </ProductInfo>
       <CartDeleteProduct productId={product.id} />
     </Container>
@@ -47,8 +49,8 @@ const Container = styled.div`
 
 const ProductImage = styled.img`
   object-fit: cover;
-  height: 150px;
-  width: 150px;
+  height: 100%;
+  width: 100%;
   border-radius: 10px;
 `;
 
@@ -57,7 +59,7 @@ const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 1em;
+  padding: 1em;
 `;
 
 const PriceInfo = styled.div`
@@ -66,6 +68,9 @@ const PriceInfo = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  height: 100%;
-  width: 100%;
+  flex-basis: 250px;
+`;
+
+const QtyContainer = styled.div`
+  display: flex;
 `;

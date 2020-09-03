@@ -68,7 +68,6 @@ export default function Cart() {
 
 const Container = styled(motion.div)`
   min-height: 100vh;
-  max-height: 500px;
   border: 1px solid black;
   border-radius: 10px;
   overflow-x: none;
@@ -82,9 +81,10 @@ const Container = styled(motion.div)`
   flex-direction: column;
   justify-content: ${(props) => (props.emptyCart ? "center" : "space-between")};
   align-items: ${(props) => (props.emptyCart ? "center" : "flex-start")};
+  z-index: 1;
 
   @media (min-width: 800px) {
-    width: 400px;
+    width: 700px;
   }
 `;
 const MyLinkButton = styled(Link)`

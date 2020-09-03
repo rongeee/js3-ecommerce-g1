@@ -29,7 +29,7 @@ const OrderPage = () => {
 
   useEffect(() => {
     getTotalCartPrice();
-  }, [totalPrice]);
+  }, [totalPrice, cart]);
 
   return (
     <WrapperPage>
