@@ -65,7 +65,7 @@ export default function ProductCard({
 
 const Container = styled(motion.div)`
   border-radius: 7px;
-  max-width: 400px;
+
   display: flex;
   flex-direction: column;
   box-shadow: 5px 5px 10px 5px rgba(189, 195, 199, 0.58);

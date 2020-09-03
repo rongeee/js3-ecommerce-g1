@@ -60,4 +60,5 @@ const Wrapper = styled(motion.div)`
   gap: 1em;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 20px;
 `;
