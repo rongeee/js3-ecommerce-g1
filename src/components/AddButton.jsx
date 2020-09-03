@@ -11,7 +11,7 @@ export const AddButton = ({ myProps }) => {
 
   const addQty = () => {
     if (checkInStock()) {
-      setCart((prevState) => {
+      setCart(prevState => {
         return {
           ...prevState,
           [id]: { ...prevState[id], qty: prevState[id].qty++ },
@@ -36,7 +36,7 @@ export const AddButton = ({ myProps }) => {
     if (cart[id]) {
       addQty();
     } else {
-      setCart((prevState) => {
+      setCart(prevState => {
         return {
           ...prevState,
           [id]: { ...product[id] },
@@ -53,13 +53,13 @@ const Btn = styled.button`
   font-size: 1rem;
   padding: 1em;
   border: 0;
-  transition: all 0.5s;
+  transition: all 0.2s;
   border-radius: 10px;
   cursor: pointer;
 
   &:hover {
     background: #2b2bff;
-    transition: all 0.5s;
+
     border-radius: 10px;
     box-shadow: 0px 3px 7px #0000ff61;
   }

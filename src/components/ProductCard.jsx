@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-
 import { AddButton } from "./AddButton";
+
+const cardVariants = {
+  initial: { y: 200 },
+  animate: { y: 0, transition: { delay: 0.15 } },
+};
 
 export default function ProductCard({
   description,
@@ -31,23 +36,27 @@ export default function ProductCard({
   };
 
   return (
-    <Container>
-      <ImageWrapper>
-        <Img
-          alt={images[0].alt}
-          src={images[0].src.small}
-          className="test"
-        ></Img>
-      </ImageWrapper>
+    <Container variants={cardVariants} initial="initial" animate="animate">
+      <MyLink to={`/product-details/${id}`}>
+        <ImageWrapper>
+          <Img
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 1 }}
+            alt={images[0].alt}
+            src={images[0].src.small}
+            className="test"
+          ></Img>
+        </ImageWrapper>
+      </MyLink>
       <InfoWrapper>
         <RatingWrapper>{renderRatingStars()}</RatingWrapper>
         <TextWrapper>
           <MyLink to={`/product-details/${id}`}>
-            <Header>{name}</Header>
+            <h2>{name}</h2>
           </MyLink>
-          <Description>{description}</Description>
+          <p>{description}</p>
         </TextWrapper>
-        <p>{price} SEK</p>
+        <Price>{price} SEK</Price>
         <AddButton myProps={{ id, name, price, stock, images: images[0] }}>
           Add to Cart
         </AddButton>
@@ -56,7 +65,7 @@ export default function ProductCard({
   );
 }
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   border-radius: 7px;
   max-width: 400px;
   display: flex;
@@ -66,32 +75,39 @@ const Container = styled.div`
 //box-shadow: 10px 10px 16px -15px rgba(0, 0, 0, 0.58);
 // box-shadow: 2px 2px 1px 2px rgba(202, 207, 210, 0.75);
 const TextWrapper = styled.div`
-  max-height: 90px;
   overflow: hidden;
-`;
-const Header = styled.h2`
-  font-size: 1.2rem;
 `;
 const ImageWrapper = styled.div`
   height: 280px;
-`;
-
-const InfoWrapper = styled.div`
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-auto-flow: row;
-`;
-
-const Img = styled.img`
-  object-fit: cover;
-  height: 100%;
-  width: 100%;
+  overflow: hidden;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 `;
+const Img = styled(motion.img)`
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+`;
 
-const Description = styled.p``;
+const InfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  block-size: 100%;
+  padding: 20px;
+  h2 {
+    font-size: 1.2rem;
+    margin: 0 0 10px;
+  }
+  p {
+    margin: 0 0 10px;
+  }
+`;
+const Price = styled.p`
+  font-weight: bold;
+  align-self: flex-end;
+`;
 
 const MyLink = styled(Link)`
   align-self: center;

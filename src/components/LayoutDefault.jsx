@@ -57,7 +57,8 @@ const Nav = styled.nav`
 `;
 
 const Main = styled.main`
-  padding-top: 80px;
+  padding-top: 100px;
+  min-block-size: 100vh;
 `;
 
 const MyLink = styled(Link)`
