@@ -5,7 +5,7 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import LayoutDefault from "./components/LayoutDefault";
 import { CartContext } from "./context/CartContext";
 import ReceiptPage from "./pages/ReceiptPage";
-import CartPage from "./pages/CartPage";
+import OrderPage from "./pages/OrderPage";
 import styled from "styled-components";
 
 function App() {
@@ -24,37 +24,35 @@ function App() {
   }, [cart]);
 
   return (
-    <Div>
-      <CartContext.Provider value={{ cart, setCart }}>
-        <Switch>
-          <Route
-            path="/product-details/:id"
-            render={(props) => {
-              return (
-                <LayoutDefault>
-                  <ProductDetailsPage {...props} />
-                </LayoutDefault>
-              );
-            }}
-          ></Route>
+    <CartContext.Provider value={{ cart, setCart }}>
+      <Switch>
+        <Route
+          path="/product-details/:id"
+          render={(props) => {
+            return (
+              <LayoutDefault>
+                <ProductDetailsPage {...props} />
+              </LayoutDefault>
+            );
+          }}
+        ></Route>
 
-          <Route path="/receipt">
-            <ReceiptPage />
-          </Route>
-          <Route path="/order">
-            <LayoutDefault>
-              <CartPage />
-            </LayoutDefault>
-          </Route>
+        <Route path="/receipt">
+          <ReceiptPage />
+        </Route>
+        <Route path="/order">
+          <LayoutDefault>
+            <OrderPage />
+          </LayoutDefault>
+        </Route>
 
-          <Route path="/">
-            <LayoutDefault>
-              <ProductList />
-            </LayoutDefault>
-          </Route>
-        </Switch>
-      </CartContext.Provider>
-    </Div>
+        <Route path="/">
+          <LayoutDefault>
+            <ProductList />
+          </LayoutDefault>
+        </Route>
+      </Switch>
+    </CartContext.Provider>
   );
 }
 

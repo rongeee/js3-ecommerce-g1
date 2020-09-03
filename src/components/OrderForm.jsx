@@ -3,7 +3,7 @@ import { useContext, useRef } from "react";
 import { CartContext } from "../context/CartContext";
 import styled from "styled-components";
 
-const Order = () => {
+const OrderForm = ({ totalPrice, discountPrice }) => {
   const { cart, setCart } = useContext(CartContext);
   const userInput = useRef();
   const discountInput = useRef();
@@ -11,10 +11,13 @@ const Order = () => {
   function handlePostOrder() {
     const url =
       "https://mock-data-api.firebaseio.com/e-commerce/orders/group-1.json";
+
     const data = {
       name: userInput.current.value,
       products: cart,
+      price: discountPrice ? discountPrice : totalPrice,
     };
+
     console.log(data);
     userInput.current.value = null;
     fetch(url, {
@@ -35,9 +38,7 @@ const Order = () => {
         <InputField type="text" ref={userInput} />
       </InputDiv>
       <InputDiv>
-        <label>Discount code:</label>
         <br />
-        <InputField type="text" ref={discountInput} />
       </InputDiv>
       <InputDiv>
         <SendOrderBtn onClick={handlePostOrder}>Send Order</SendOrderBtn>
@@ -46,7 +47,7 @@ const Order = () => {
   );
 };
 
-export default Order;
+export default OrderForm;
 const InputWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;

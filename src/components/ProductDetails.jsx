@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import ReviewList from "./ReviewList";
+import { AddButton } from "./AddButton";
 
 const ProductDetails = ({ productId }) => {
   const url = `https://mock-data-api.firebaseio.com/e-commerce/products/${productId}.json`;
@@ -12,7 +13,7 @@ const ProductDetails = ({ productId }) => {
     fetch(url)
       .then((res) => res.json())
       .then((result) => {
-        // console.log(result);
+        console.log(result);
         setProduct(result);
       });
   };
@@ -46,7 +47,7 @@ const ProductDetails = ({ productId }) => {
             <Img
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 3 }}
+              transition={{ duration: 1 }}
               style={{ backgroundImage: `url(${item.src.large})` }}
               key={index}
             />
@@ -67,8 +68,19 @@ const ProductDetails = ({ productId }) => {
           <ProductInfo>
             <Span>Stock:</Span> {product.stock} in stock.
           </ProductInfo>
-
-          <Btn>Add to cart</Btn>
+          {Object.entries(product).length > 0 && (
+            <AddButton
+              myProps={{
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                stock: product.stock,
+                images: product.images[0],
+              }}
+            >
+              Add to Cart
+            </AddButton>
+          )}
         </InfoWrapper>
       </Card>
 
@@ -87,7 +99,7 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 100px;
+  /* padding-bottom: 100px; */
   border-bottom: 1px solid #dadada;
 `;
 const Title = styled.h3`
@@ -101,11 +113,21 @@ const Img = styled(motion.div)`
   border-radius: 8px;
   block-size: 400px;
   inline-size: 500px;
+
+  @media (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding-left: 3em;
+  margin: 3em 3em 8em;
+
+  @media (max-width: 500px) {
+    padding: 0;
+  }
 `;
 const Btn = styled.button`
   background: #0f0f6d;
