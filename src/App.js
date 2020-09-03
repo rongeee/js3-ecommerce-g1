@@ -24,37 +24,35 @@ function App() {
   }, [cart]);
 
   return (
-    <Div>
-      <CartContext.Provider value={{ cart, setCart }}>
-        <Switch>
-          <Route
-            path="/product-details/:id"
-            render={(props) => {
-              return (
-                <LayoutDefault>
-                  <ProductDetailsPage {...props} />
-                </LayoutDefault>
-              );
-            }}
-          ></Route>
+    <CartContext.Provider value={{ cart, setCart }}>
+      <Switch>
+        <Route
+          path="/product-details/:id"
+          render={(props) => {
+            return (
+              <LayoutDefault>
+                <ProductDetailsPage {...props} />
+              </LayoutDefault>
+            );
+          }}
+        ></Route>
 
-          <Route path="/receipt">
-            <ReceiptPage />
-          </Route>
-          <Route path="/order">
-            <LayoutDefault>
-              <OrderPage />
-            </LayoutDefault>
-          </Route>
+        <Route path="/receipt">
+          <ReceiptPage />
+        </Route>
+        <Route path="/order">
+          <LayoutDefault>
+            <OrderPage />
+          </LayoutDefault>
+        </Route>
 
-          <Route path="/">
-            <LayoutDefault>
-              <ProductList />
-            </LayoutDefault>
-          </Route>
-        </Switch>
-      </CartContext.Provider>
-    </Div>
+        <Route path="/">
+          <LayoutDefault>
+            <ProductList />
+          </LayoutDefault>
+        </Route>
+      </Switch>
+    </CartContext.Provider>
   );
 }
 

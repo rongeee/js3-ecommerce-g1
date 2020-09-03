@@ -13,22 +13,19 @@ const LayoutDefault = ({ children }) => {
   };
 
   return (
-    <div>
+    <>
       <header>
         <Nav>
           <Logowrapper>
             {/* <img alt="Logo" src="" /> */}
-            <P>Logo</P>
             <MyLink to={`/`}>Home</MyLink>
           </Logowrapper>
 
-          <CartWrapper onClick={handleClick} className="cart-btn-wrapper">
-            <Image src={CartIkon} alt="" />
-          </CartWrapper>
+          <Image onClick={handleClick} src={CartIkon} alt="" />
         </Nav>
       </header>
       {!isHidden && <Cart />}
-      {children}
+      <Main>{children}</Main>
       <footer>
         <ul>
           Footer
@@ -37,7 +34,7 @@ const LayoutDefault = ({ children }) => {
           <li>rad3</li>
         </ul>
       </footer>
-    </div>
+    </>
   );
 };
 
@@ -48,16 +45,19 @@ export default LayoutDefault;
 // `;
 const Nav = styled.nav`
   display: flex;
-  height: 60px;
-  width: 100%;
+  position: fixed;
+  z-index: 2;
   margin: 0;
-  padding: 5px;
+  width: 100%;
   justify-content: space-between;
-  flex-direction: row-reverse;
   background-color: #ffffff;
-  border-bottom: 1px solid  #d7dbdd ;
-  margin-bottom 10vh;
-  box-shadow: 2px 2px 1px rgba( 229, 231, 233 , 0.75);
+  border-bottom: 1px solid #d7dbdd;
+  box-shadow: 2px 2px 1px rgba(229, 231, 233, 0.75);
+  padding: 1em 3em;
+`;
+
+const Main = styled.main`
+  padding-top: 80px;
 `;
 
 const MyLink = styled(Link)`
@@ -67,25 +67,12 @@ const MyLink = styled(Link)`
   color: black;
 `;
 const Logowrapper = styled.div`
-  padding: 20px;
   display: flex;
-  width: 15%;
-  justify-content: space-evenly;
-`;
-const CartWrapper = styled.div`
-  padding-left: 20px;
-  padding-top: 10px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 8px;
-  block-size: 300px;
-  inline-size: 300px;
-`;
-const P = styled.p`
-  margin: 0;
 `;
 const Image = styled.img`
   width: 40px;
   height: 40px;
+`;
+const P = styled.p`
+  margin: 0;
 `;

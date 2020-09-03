@@ -22,13 +22,12 @@ const Coupons = ({ setDiscountPrice, totalPrice }) => {
     fetchCoupons();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  let couponsArr = [];
   const checkCoupons = () => {
-    couponsArr = [];
-    Object.keys(coupons).map((item) => couponsArr.push(item));
+    let couponsArr = Object.keys(coupons);
 
     couponsArr.find((coupon) => {
-      if (coupon === couponCode.current.value) {
+      console.log(coupons[coupon]);
+      if (coupon === couponCode.current.value && coupons[coupon].valid) {
         return giveDiscount(couponCode.current.value);
       }
     });

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import ReviewList from "./ReviewList";
+import { AddButton } from "./AddButton";
 
 const ProductDetails = ({ productId }) => {
   const url = `https://mock-data-api.firebaseio.com/e-commerce/products/${productId}.json`;
@@ -12,7 +13,7 @@ const ProductDetails = ({ productId }) => {
     fetch(url)
       .then((res) => res.json())
       .then((result) => {
-        // console.log(result);
+        console.log(result);
         setProduct(result);
       });
   };
@@ -46,7 +47,7 @@ const ProductDetails = ({ productId }) => {
             <Img
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 3 }}
+              transition={{ duration: 1 }}
               style={{ backgroundImage: `url(${item.src.large})` }}
               key={index}
             />
@@ -67,8 +68,19 @@ const ProductDetails = ({ productId }) => {
           <ProductInfo>
             <Span>Stock:</Span> {product.stock} in stock.
           </ProductInfo>
-
-          <Btn>Add to cart</Btn>
+          {Object.entries(product).length > 0 && (
+            <AddButton
+              myProps={{
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                stock: product.stock,
+                images: product.images[0],
+              }}
+            >
+              Add to Cart
+            </AddButton>
+          )}
         </InfoWrapper>
       </Card>
 
