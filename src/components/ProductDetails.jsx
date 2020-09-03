@@ -106,7 +106,6 @@ const Img = styled(motion.div)`
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 3em;
 `;
 const Btn = styled.button`
   background: #0f0f6d;
@@ -117,7 +116,7 @@ const Btn = styled.button`
   transition: all 0.5s;
   border-radius: 10px;
   cursor: pointer;
-  width: 30%;
+  width: 150px;
   &:hover {
     background: #2b2bff;
     transition: all 0.5s;

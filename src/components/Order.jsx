@@ -25,7 +25,6 @@ const Order = () => {
       .then((data) => {
         console.log(data);
         setCart({});
-        localStorage.clear();
       });
   }
   return (
