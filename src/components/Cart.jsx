@@ -1,38 +1,43 @@
-import React, { useContext, useEffect } from "react"
-import styled from "styled-components"
-import { CartContext } from "../context/CartContext"
-import { CartItem } from "./CartItem"
-import { motion, AnimatePresence } from "framer-motion"
-import { Link } from "react-router-dom"
-import CartClearCart from "./CartClearCart"
+import React, { useContext, useEffect, useState } from "react";
+import styled from "styled-components";
+import { CartContext } from "../context/CartContext";
+import { CartItem } from "./CartItem";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+import CartClearCart from "./CartClearCart";
 
 const containerVariants = {
   initial: { opacity: 0, x: "100%" },
   animate: { opacity: 1, x: 0, transition: { type: "tween" } },
   exit: { opacity: 0, x: "100%", transition: { type: "tween" } },
-}
+};
 
 export default function Cart() {
-  const { cart } = useContext(CartContext)
+  const { cart } = useContext(CartContext);
+  let [emptyCart, setEmptyCart] = useState(true);
 
-  useEffect(() => {}, [cart])
+  useEffect(() => {
+    return Object.entries(cart).length > 0
+      ? setEmptyCart(false)
+      : setEmptyCart(true);
+  }, [cart]);
 
   const getTotalCartPrice = () => {
-    const cartArr = Object.keys(cart)
-    let totalPrice = 0
+    const cartArr = Object.keys(cart);
+    let totalPrice = 0;
 
     cartArr.forEach((key) => {
-      totalPrice += cart[key].qty * cart[key].price
-    })
+      totalPrice += cart[key].qty * cart[key].price;
+    });
 
-    return totalPrice + " SEK"
-  }
+    return totalPrice;
+  };
 
   const renderItems = () => {
     return Object.keys(cart).map((item) => {
-      return <CartItem product={cart[item]} />
-    })
-  }
+      return <CartItem product={cart[item]} />;
+    });
+  };
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -41,26 +46,24 @@ export default function Cart() {
         initial="initial"
         animate="animate"
         exit="exit"
+        emptyCart={emptyCart}
       >
-        <Wrapper>
-          {renderItems()}
-          <div>
-            <p>
-              {Object.entries(cart).length > 0
-                ? getTotalCartPrice()
-                : "Empty Cart"}
-            </p>
-          </div>
-        </Wrapper>
-        {Object.entries(cart).length > 0 ? (
-          <MyLinkButton to={`/order`}>Go to order page</MyLinkButton>
+        {!emptyCart && <Wrapper> {renderItems()}</Wrapper>}
+        {emptyCart && <p>Empty Cart</p>}
+        {!emptyCart ? (
+          <OrderContainer>
+            <TotalPriceContainer>
+              <p>Total Price: {getTotalCartPrice()} SEK</p>
+              <CartClearCart />
+            </TotalPriceContainer>
+            <MyLinkButton to={`/order`}>Go to order page</MyLinkButton>{" "}
+          </OrderContainer>
         ) : (
-          <MyLinkButton inactive={true}>Go to order page</MyLinkButton>
+          ""
         )}
-        <CartClearCart />
       </Container>
     </AnimatePresence>
-  )
+  );
 }
 
 const Container = styled(motion.div)`
@@ -68,17 +71,22 @@ const Container = styled(motion.div)`
   max-height: 500px;
   border: 1px solid black;
   border-radius: 10px;
-  overflow: scroll;
+  overflow-x: none;
+  overflow-y: scroll;
   position: fixed;
   background-color: white;
-  top: 80px;
+  padding-top: 80px;
   right: 0;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: ${(props) => (props.emptyCart ? "center" : "space-between")};
+  align-items: ${(props) => (props.emptyCart ? "center" : "flex-start")};
 
   @media (min-width: 800px) {
     width: 400px;
   }
-`
+`;
 const MyLinkButton = styled(Link)`
   background-color: #2e86c1;
   color: white;
@@ -87,8 +95,24 @@ const MyLinkButton = styled(Link)`
   text-decoration: none;
   display: inline-block;
   border-radius: 5px;
-`
+`;
 
-const Wrapper = styled.div``
-const Item = styled.div``
-const Img = styled.div``
+const OrderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1em;
+`;
+
+const TotalPriceContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-bottom: 1em;
+`;
+
+const Wrapper = styled.div``;
+const Item = styled.div``;
+const Img = styled.div``;
