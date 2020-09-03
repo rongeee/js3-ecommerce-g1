@@ -26,14 +26,18 @@ const LayoutDefault = ({ children }) => {
       </header>
       {!isHidden && <Cart />}
       <Main>{children}</Main>
-      <footer>
-        <ul>
-          Footer
-          <li>rad1</li>
-          <li>rad2</li>
-          <li>rad3</li>
-        </ul>
-      </footer>
+      <Footer>
+        <FooterTextWrapper>
+          <H3>Made by</H3>
+          <Ul>
+            <li>Andreas</li>
+            <li>Janis</li>
+            <li>Hannah</li>
+            <li>Patric</li>
+            <li>Birk</li>
+          </Ul>
+        </FooterTextWrapper>
+      </Footer>
     </>
   );
 };
@@ -57,7 +61,7 @@ const Nav = styled.nav`
 `;
 
 const Main = styled.main`
-  padding-top: 80px;
+  padding: 80px 0;
 `;
 
 const MyLink = styled(Link)`
@@ -75,4 +79,31 @@ const Image = styled.img`
 `;
 const P = styled.p`
   margin: 0;
+`;
+
+const Footer = styled.footer`
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  background-color: #ffffff;
+  border-top: 1px solid #d7dbdd;
+  box-shadow: 2px 2px 1px rgba(229, 231, 233, 0.75);
+  padding: 80px 0;
+`;
+
+const FooterTextWrapper = styled.div`
+  width: max-content;
+  margin: 0 auto;
+  color: grey;
+`;
+
+const Ul = styled.ul`
+  list-style-type: none;
+  padding-left: 7px;
+  
+`;
+
+const H3 = styled.h3`
+  margin-bottom: 10px;
+  color: darkslategrey;
 `;

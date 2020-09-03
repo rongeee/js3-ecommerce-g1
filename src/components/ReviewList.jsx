@@ -68,12 +68,19 @@ export default ReviewList
 
 const Container = styled(motion.div)`
   inline-size: 100%;
-  max-inline-size: 600px;
+  max-inline-size: 800px;
   block-size: 600px;
   margin: 0 auto;
-  padding: 100px 0;
+  padding: 100px 3em;
   * {
     margin: 0;
+  }
+
+  @media(max-width: 500px) {
+    margin: 3em;
+    inline-size: unset;
+    block-size: unset;
+    padding: 0;
   }
 `
 const Review = styled(motion.div)`

@@ -99,7 +99,7 @@ const Card = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 100px;
+  /* padding-bottom: 100px; */
   border-bottom: 1px solid #dadada;
 `;
 const Title = styled.h3`
@@ -113,12 +113,21 @@ const Img = styled(motion.div)`
   border-radius: 8px;
   block-size: 400px;
   inline-size: 500px;
+
+  @media(max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 3em;
+  margin: 3em 3em 8em;
+
+  @media(max-width: 500px) {
+    padding: 0;
+  }
 `;
 const Btn = styled.button`
   background: #0f0f6d;
