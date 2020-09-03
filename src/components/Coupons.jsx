@@ -1,42 +1,41 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
-import { CartContext } from "../context/CartContext";
+import React, { useEffect, useState, useRef, useContext } from "react"
+import { CartContext } from "../context/CartContext"
 
 const Coupons = ({ setDiscountPrice, totalPrice }) => {
-  const [coupons, setCoupons] = useState({});
-  const { cart } = useContext(CartContext);
-  const url =
-    "https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json";
+  const [coupons, setCoupons] = useState({})
+  const { cart } = useContext(CartContext)
+  const url = "https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json"
 
-  const couponCode = useRef();
+  const couponCode = useRef()
 
   const fetchCoupons = () => {
     fetch(url)
       .then((res) => res.json())
       .then((result) => {
-        setCoupons(result);
+        setCoupons(result)
         // console.log(result);
-      });
-  };
+      })
+  }
 
   useEffect(() => {
-    fetchCoupons();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    fetchCoupons()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   const checkCoupons = () => {
-    let couponsArr = Object.keys(coupons);
+    let couponsArr = Object.keys(coupons)
 
     couponsArr.find((coupon) => {
-      console.log(coupons[coupon]);
+      console.log(coupons[coupon])
       if (coupon === couponCode.current.value && coupons[coupon].valid) {
-        return giveDiscount(couponCode.current.value);
+        return giveDiscount(couponCode.current.value)
       }
-    });
-  };
+    })
+  }
 
   const giveDiscount = (currentCoupon) => {
-    let tempPrice = Math.round(totalPrice * coupons[currentCoupon].discount);
-    setDiscountPrice(tempPrice);
-  };
+    let tempPrice = Math.round(totalPrice * coupons[currentCoupon].discount)
+    setDiscountPrice(tempPrice)
+  }
 
   // console.log(coupons);
 
@@ -45,7 +44,7 @@ const Coupons = ({ setDiscountPrice, totalPrice }) => {
       <input type="text" ref={couponCode} />
       <button onClick={checkCoupons}>Check</button>
     </div>
-  );
-};
+  )
+}
 
-export default Coupons;
+export default Coupons

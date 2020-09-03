@@ -1,16 +1,16 @@
-import React from "react";
-import Cart from "./Cart";
-import { useState } from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import CartIkon from "./images/cart.png";
+import React from "react"
+import Cart from "./Cart"
+import { useState } from "react"
+import styled from "styled-components"
+import { Link } from "react-router-dom"
+import CartIkon from "./images/cart.png"
 
 const LayoutDefault = ({ children }) => {
-  const [isHidden, setIsHidden] = useState(true);
+  const [isHidden, setIsHidden] = useState(false)
 
   const handleClick = () => {
-    setIsHidden(!isHidden);
-  };
+    setIsHidden(!isHidden)
+  }
 
   return (
     <>
@@ -35,10 +35,10 @@ const LayoutDefault = ({ children }) => {
         </ul>
       </footer>
     </>
-  );
-};
+  )
+}
 
-export default LayoutDefault;
+export default LayoutDefault
 
 // const Cart = styled.div`
 //   display: ${(isHidden) => (isHidden ? "block" : "none")};
@@ -54,25 +54,25 @@ const Nav = styled.nav`
   border-bottom: 1px solid #d7dbdd;
   box-shadow: 2px 2px 1px rgba(229, 231, 233, 0.75);
   padding: 1em 3em;
-`;
+`
 
 const Main = styled.main`
   padding-top: 80px;
-`;
+`
 
 const MyLink = styled(Link)`
   align-self: center;
   text-decoration: none;
   font-weight: bold;
   color: black;
-`;
+`
 const Logowrapper = styled.div`
   display: flex;
-`;
+`
 const Image = styled.img`
   width: 40px;
   height: 40px;
-`;
+`
 const P = styled.p`
   margin: 0;
-`;
+`
