@@ -36,7 +36,7 @@ const OrderPage = () => {
       <OrderWrapper>
         {renderItems()}
         <h1>{`${totalPrice} SEK`}</h1>
-        <h2>{discountPrice && `Total Price ${discountPrice} SEK`}</h2>
+        {discountPrice && <h2>Total Price {discountPrice} SEK</h2>}
         <Coupons totalPrice={totalPrice} setDiscountPrice={setDiscountPrice} />
         <OrderForm totalPrice={totalPrice} discountPrice={discountPrice} />
       </OrderWrapper>
