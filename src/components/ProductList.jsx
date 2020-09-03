@@ -15,10 +15,6 @@ const listVariants = {
     },
   },
 };
-const childVariants = {
-  initial: { y: 200 },
-  animate: { y: 0, transition: { delay: 0.15 } },
-};
 
 const ProductList = () => {
   let [products, setProducts] = useState({});
@@ -37,9 +33,11 @@ const ProductList = () => {
   };
 
   const renderProductCard = () => {
-    return Object.keys(products).map(key => {
+    return Object.keys(products).map((key, index) => {
       const product = products[key];
-      return <ProductCard key={key} {...product} variants={childVariants} />;
+      return (
+        <ProductCard key={key} {...product} delayIndex={index - index * 0.95} />
+      );
     });
   };
 

@@ -12,7 +12,7 @@ export default function ProductCard({
   price,
   rating,
   stock,
-  variants,
+  delayIndex,
 }) {
   const renderRatingStars = () => {
     let rounded = Math.round(rating);
@@ -23,16 +23,18 @@ export default function ProductCard({
     }
 
     return ratingArr < 1 ? (
-      <span key={0} style={{ color: "black" }}>
-        No Rating
-      </span>
+      <span key={0} style={{ color: "black" }}></span>
     ) : (
       ratingArr
     );
   };
 
   return (
-    <Container variants={variants}>
+    <Container
+      initial={{ y: 200 }}
+      animate={{ y: 0 }}
+      transition={{ delay: delayIndex, duration: 0.5 }}
+    >
       <MyLink to={`/product-details/${id}`}>
         <ImageWrapper>
           <Img
@@ -115,6 +117,6 @@ const MyLink = styled(Link)`
 const RatingWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  color: #edf906;
+  color: #e1a314;
   height: 40px;
 `;
