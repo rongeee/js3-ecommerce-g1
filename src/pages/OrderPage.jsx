@@ -29,8 +29,7 @@ const OrderPage = () => {
 
   useEffect(() => {
     getTotalCartPrice();
-  }, [totalPrice, cart]);
-
+  }, [totalPrice, cart]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <WrapperPage>
       <OrderWrapper>

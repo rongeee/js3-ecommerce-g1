@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { addQty, deleteProduct } from "../cart.utils";
 import { CartContext } from "../context/CartContext";
-import { resolveMotionValue } from "framer-motion";
 
 const CartQtyBtn = ({ action, product, value }) => {
   const { cart, setCart } = useContext(CartContext);

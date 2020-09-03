@@ -129,23 +129,7 @@ const InfoWrapper = styled.div`
     padding: 0;
   }
 `;
-const Btn = styled.button`
-  background: #0f0f6d;
-  color: #ffffff;
-  font-size: 1rem;
-  padding: 1em;
-  border: 0;
-  transition: all 0.5s;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 150px;
-  &:hover {
-    background: #2b2bff;
-    transition: all 0.5s;
-    border-radius: 10px;
-    box-shadow: 0px 3px 7px #0000ff61;
-  }
-`;
+
 const Span = styled.span`
   font-weight: bold;
 `;

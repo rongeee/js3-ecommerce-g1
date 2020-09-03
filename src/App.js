@@ -6,7 +6,6 @@ import LayoutDefault from "./components/LayoutDefault";
 import { CartContext } from "./context/CartContext";
 import ReceiptPage from "./pages/ReceiptPage";
 import OrderPage from "./pages/OrderPage";
-import styled from "styled-components";
 
 function App() {
   const [cart, setCart] = useState({});
@@ -57,8 +56,3 @@ function App() {
 }
 
 export default App;
-
-const Div = styled.div`
-  font-family: sans-serif;
-  margin: 0;
-`;

@@ -6,7 +6,6 @@ import styled from "styled-components";
 const OrderForm = ({ totalPrice, discountPrice }) => {
   const { cart, setCart } = useContext(CartContext);
   const userInput = useRef();
-  const discountInput = useRef();
 
   function handlePostOrder() {
     const url =

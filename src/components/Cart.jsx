@@ -114,5 +114,3 @@ const TotalPriceContainer = styled.div`
 `;
 
 const Wrapper = styled.div``;
-const Item = styled.div``;
-const Img = styled.div``;

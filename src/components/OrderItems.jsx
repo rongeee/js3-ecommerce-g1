@@ -3,13 +3,6 @@ import React from "react";
 import styled from "styled-components";
 
 const OrderItems = ({ product }) => {
-  const getTotalPrice = () => {
-    const price = product.price;
-    const qty = product.qty;
-
-    return price * qty;
-  };
-
   return (
     <Container>
       <ImageWrapper>
