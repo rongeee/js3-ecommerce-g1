@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import styled from "styled-components"
-import { addQty } from "../cart.utils"
+import { addQty, deleteProduct } from "../cart.utils"
 import { CartContext } from "../context/CartContext"
 import { resolveMotionValue } from "framer-motion"
 
@@ -10,7 +10,11 @@ const CartQtyBtn = ({ action, product, value }) => {
   return (
     <Container>
       <Button
-        onClick={() => addQty(cart, setCart, product.id, product.stock, value)}
+        onClick={
+          product.qty === 1
+            ? () => deleteProduct(setCart, product.id)
+            : () => addQty(cart, setCart, product.id, product.stock, value)
+        }
       >
         {action}
       </Button>
