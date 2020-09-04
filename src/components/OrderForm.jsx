@@ -3,6 +3,7 @@ import { useContext, useRef } from "react";
 import { CartContext } from "../context/CartContext";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const OrderForm = ({ totalPrice, discountPrice }) => {
   const { cart, setCart } = useContext(CartContext);
@@ -38,13 +39,15 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
     >
       <NameForm>
         <input type="text" ref={userInput} placeholder="Enter your name here" />
-        <motion.button
-          onClick={handlePostOrder}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          Order
-        </motion.button>
+        <Link to="/receipt">
+          <motion.button
+            onClick={handlePostOrder}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            Order
+          </motion.button>
+        </Link>
       </NameForm>
     </InputWrapper>
   );
