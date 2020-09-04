@@ -1,10 +1,14 @@
 import React from "react";
-
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-const OrderItems = ({ product }) => {
+const OrderItems = ({ product, delayIndex }) => {
   return (
-    <Container>
+    <Container
+      initial={{ opacity: 0, y: 100 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: delayIndex }}
+    >
       <ImageWrapper>
         <ProductImage
           src={product.images.src.small}
@@ -14,7 +18,6 @@ const OrderItems = ({ product }) => {
 
       <ProductInfo>
         <h4>{product.name}</h4>
-
         <p>
           Amount: {product.qty} x {product.price} SEK
         </p>
@@ -25,15 +28,18 @@ const OrderItems = ({ product }) => {
 
 export default OrderItems;
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   display: flex;
-  border-top: 1px solid #d7dbdd;
-  margin-bottom: 5px;
-  border-bottom: 1px solid #d7dbdd;
-  height: 250px;
-  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 30px;
 `;
 
+const ImageWrapper = styled.div`
+  height: 200px;
+  width: 250px;
+  border-radius: 10px;
+  overflow: hidden;
+`;
 const ProductImage = styled.img`
   object-fit: cover;
   height: 100%;
@@ -41,19 +47,25 @@ const ProductImage = styled.img`
 `;
 
 const ProductInfo = styled.div`
-  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 3em;
+  justify-content: space-between;
+  flex: 1;
+  font-weight: bold;
+  line-height: 0;
+  padding: 0 0 0 20px;
+  h4 {
+    margin: 0 30px 0 0;
+    font-size: 30px;
+    margin: 30px 0 0;
+  }
+  p {
+    font-size: 20px;
+    align-self: flex-end;
+    margin: 0 0 30px;
+  }
 `;
 
 // const PriceInfo = styled.div`
 //   display: flex;
 //   justify-content: space-between;
 // `;
-
-const ImageWrapper = styled.div`
-  height: 200px;
-  width: 250px;
-`;

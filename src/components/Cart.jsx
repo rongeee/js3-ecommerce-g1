@@ -26,7 +26,7 @@ export default function Cart() {
     const cartArr = Object.keys(cart);
     let totalPrice = 0;
 
-    cartArr.forEach((key) => {
+    cartArr.forEach(key => {
       totalPrice += cart[key].qty * cart[key].price;
     });
 
@@ -34,7 +34,7 @@ export default function Cart() {
   };
 
   const renderItems = () => {
-    return Object.keys(cart).map((item) => {
+    return Object.keys(cart).map(item => {
       return <CartItem product={cart[item]} />;
     });
   };
@@ -79,8 +79,8 @@ const Container = styled(motion.div)`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: ${(props) => (props.emptyCart ? "center" : "space-between")};
-  align-items: ${(props) => (props.emptyCart ? "center" : "flex-start")};
+  justify-content: ${props => (props.emptyCart ? "center" : "space-between")};
+  align-items: ${props => (props.emptyCart ? "center" : "flex-start")};
   z-index: 1;
 
   @media (min-width: 800px) {

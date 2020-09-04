@@ -4,6 +4,7 @@ import OrderForm from "../components/OrderForm";
 import styled from "styled-components";
 import OrderItems from "../components/OrderItems";
 import Coupons from "../components/Coupons";
+import { motion } from "framer-motion";
 
 const OrderPage = () => {
   const { cart } = useContext(CartContext);
@@ -14,7 +15,7 @@ const OrderPage = () => {
     const cartArr = Object.keys(cart);
     let tempPrice = 0;
 
-    cartArr.forEach((key) => {
+    cartArr.forEach(key => {
       tempPrice += cart[key].qty * cart[key].price;
     });
 
@@ -22,8 +23,10 @@ const OrderPage = () => {
   };
 
   const renderItems = () => {
-    return Object.keys(cart).map((item) => {
-      return <OrderItems product={cart[item]} />;
+    return Object.keys(cart).map((item, index) => {
+      return (
+        <OrderItems product={cart[item]} delayIndex={index - index * 0.85} />
+      );
     });
   };
 
@@ -31,24 +34,44 @@ const OrderPage = () => {
     getTotalCartPrice();
   }, [totalPrice, cart]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
-    <WrapperPage>
-      <OrderWrapper>
+    <Page>
+      <Wrapper>
+        <h1>Order summary</h1>
         {renderItems()}
-        <h1>{`${totalPrice} SEK`}</h1>
-        {discountPrice && <h2>Total Price {discountPrice} SEK</h2>}
+        <TotalPrice>{`${totalPrice} SEK`}</TotalPrice>
+        <DiscPrice>
+          {discountPrice && (
+            <motion.h2 initial={{}} animate={{ scale: [1.3, 1] }}>
+              Total Price {discountPrice} SEK
+            </motion.h2>
+          )}
+        </DiscPrice>
         <Coupons totalPrice={totalPrice} setDiscountPrice={setDiscountPrice} />
         <OrderForm totalPrice={totalPrice} discountPrice={discountPrice} />
-      </OrderWrapper>
-    </WrapperPage>
+      </Wrapper>
+    </Page>
   );
 };
 
 export default OrderPage;
 
-const OrderWrapper = styled.div`
-  width: 50vw;
-`;
-const WrapperPage = styled.div`
+const Page = styled.div`
   display: flex;
   justify-content: center;
+`;
+const Wrapper = styled.div`
+  inline-size: 100%;
+  max-inline-size: 800px;
+  h1 {
+    margin: 0 0 40px;
+    font-size: 40px;
+  }
+`;
+const TotalPrice = styled.p`
+  font-size: 30px;
+  font-weight: bold;
+  text-align: end;
+`;
+const DiscPrice = styled.p`
+  block-size: 50px;
 `;

@@ -2,6 +2,7 @@ import React from "react";
 import { useContext, useRef } from "react";
 import { CartContext } from "../context/CartContext";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 const OrderForm = ({ totalPrice, discountPrice }) => {
   const { cart, setCart } = useContext(CartContext);
@@ -23,31 +24,35 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
       method: "POST",
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         console.log(data);
         setCart({});
       });
   }
   return (
-    <InputWrapper>
-      <InputDiv>
-        <label>Name:</label>
-        <br />
-        <InputField type="text" ref={userInput} />
-      </InputDiv>
-      <InputDiv>
-        <br />
-      </InputDiv>
-      <InputDiv>
-        <SendOrderBtn onClick={handlePostOrder}>Send Order</SendOrderBtn>
-      </InputDiv>
+    <InputWrapper
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 1.2 }}
+    >
+      <NameForm>
+        <input type="text" ref={userInput} placeholder="Enter your name here" />
+        <motion.button
+          onClick={handlePostOrder}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          Order
+        </motion.button>
+      </NameForm>
     </InputWrapper>
   );
 };
 
 export default OrderForm;
-const InputWrapper = styled.div`
+
+const InputWrapper = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -60,22 +65,38 @@ const InputDiv = styled.div`
   width: 50%;
   justify-self: space-around;
 `;
-const InputField = styled.input`
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-`;
-const SendOrderBtn = styled.button`
-  width: 50%;
-  background-color: #4caf50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+
+const NameForm = styled.div`
+  display: flex;
+  inline-size: 100%;
+  background: red;
+  background-color: #ececec;
+  padding: 10px 10px 10px 20px;
+  border-radius: 10px;
+  margin: 30px 0;
+  input {
+    inline-size: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: bold;
+    color: #111;
+  }
+  button {
+    min-inline-size: 150px;
+    border: none;
+    padding: 20px 50px;
+    background-color: #1eeaac;
+    border-radius: 7px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      box-shadow: 0px 3px 20px rgba(30, 234, 172, 0.4);
+    }
+  }
 `;
