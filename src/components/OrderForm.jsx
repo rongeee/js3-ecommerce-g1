@@ -2,6 +2,7 @@ import React from "react";
 import { useContext, useRef, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const OrderForm = ({ totalPrice, discountPrice }) => {
@@ -9,7 +10,6 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
   const [orderId, setOrderId] = useState({});
 
   const userInput = useRef();
-  const discountInput = useRef();
 
   function handlePostOrder() {
     const url =
@@ -29,6 +29,7 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         setCart({});
         setOrderId(data.name);
       });
@@ -36,53 +37,78 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
 
   // console.log(orderId);
   return (
-    <InputWrapper>
-      <InputDiv>
-        <label>Name:</label>
-        <br />
-        <InputField type="text" ref={userInput} />
-      </InputDiv>
-      <InputDiv>
-        <br />
-      </InputDiv>
-      <InputDiv>
-        <SendOrderBtn onClick={handlePostOrder}>Send Order</SendOrderBtn>
-        <Link to={`../receipt/${orderId}`}>receipt</Link>
-      </InputDiv>
+    <InputWrapper
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 1.2 }}
+    >
+      <NameForm>
+        <input type="text" ref={userInput} placeholder="Enter your name here" />
+        <Link to="/receipt">
+          <motion.button
+            onClick={handlePostOrder}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+          >
+            Order
+          </motion.button>
+        </Link>
+      </NameForm>
     </InputWrapper>
   );
 };
 
 export default OrderForm;
-const InputWrapper = styled.div`
+
+const InputWrapper = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   flex-direction: column;
   justify-content: space-around; ;
 `;
-const InputDiv = styled.div`
+
+const NameForm = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 50%;
-  justify-self: space-around;
-`;
-const InputField = styled.input`
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-`;
-const SendOrderBtn = styled.button`
-  width: 50%;
-  background-color: #4caf50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  inline-size: 100%;
+  background: red;
+  background-color: #ececec;
+  padding: 10px 10px 10px 20px;
+  border-radius: 10px;
+  margin: 15px 0;
+  @media screen and (min-width: 470px) {
+    flex-wrap: nowrap;
+    margin: 30px 0;
+  }
+  input {
+    inline-size: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: bold;
+    color: #111;
+    block-size: 70px;
+    @media screen and (min-width: 470px) {
+      block-size: unset;
+    }
+  }
+  button {
+    min-inline-size: 150px;
+    border: none;
+    padding: 20px 50px;
+    background-color: #1eeaac;
+    border-radius: 7px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+
+    &:hover {
+      box-shadow: 0px 3px 20px rgba(30, 234, 172, 0.4);
+    }
+  }
 `;

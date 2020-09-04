@@ -61,7 +61,8 @@ const Nav = styled.nav`
 `;
 
 const Main = styled.main`
-  padding: 80px 0;
+  padding-top: 100px;
+  min-block-size: 100vh;
 `;
 
 const MyLink = styled(Link)`
@@ -77,14 +78,8 @@ const Image = styled.img`
   width: 40px;
   height: 40px;
 `;
-const P = styled.p`
-  margin: 0;
-`;
 
 const Footer = styled.footer`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
   background-color: #ffffff;
   border-top: 1px solid #d7dbdd;
   box-shadow: 2px 2px 1px rgba(229, 231, 233, 0.75);
@@ -100,7 +95,6 @@ const FooterTextWrapper = styled.div`
 const Ul = styled.ul`
   list-style-type: none;
   padding-left: 7px;
-  
 `;
 
 const H3 = styled.h3`
