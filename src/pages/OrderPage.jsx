@@ -38,10 +38,14 @@ const OrderPage = () => {
       <Wrapper>
         <h1>Order summary</h1>
         {renderItems()}
-        <TotalPrice>{`${totalPrice} SEK`}</TotalPrice>
+        <TotalPrice>Total price {`${totalPrice} SEK`}</TotalPrice>
         <DiscPrice>
           {discountPrice && (
-            <motion.h2 initial={{}} animate={{ scale: [1.3, 1] }}>
+            <motion.h2
+              animate={{ scale: [1, 1.3, 1] }}
+              style={{ originX: 0 }}
+              transition={{ duration: 0.55 }}
+            >
               Total Price {discountPrice} SEK
             </motion.h2>
           )}
@@ -71,7 +75,11 @@ const Wrapper = styled.div`
 const TotalPrice = styled.p`
   font-size: 30px;
   font-weight: bold;
-  text-align: end;
+  text-align: center;
+  margin: 100px 0 30px;
+  @media screen and (min-width: 860px) {
+    font-size: 40px;
+  }
 `;
 const DiscPrice = styled.p`
   block-size: 50px;

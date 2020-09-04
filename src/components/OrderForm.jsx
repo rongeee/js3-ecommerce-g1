@@ -62,12 +62,6 @@ const InputWrapper = styled(motion.div)`
   flex-direction: column;
   justify-content: space-around; ;
 `;
-const InputDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  justify-self: space-around;
-`;
 
 const NameForm = styled.div`
   display: flex;
