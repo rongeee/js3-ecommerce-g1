@@ -87,12 +87,18 @@ export default Coupons;
 
 const Coupon = styled(motion.div)`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   inline-size: 100%;
   background: red;
   background-color: #ececec;
   padding: 10px 10px 10px 20px;
   border-radius: 10px;
-  margin: 30px 0;
+  margin: 15px 0;
+  @media screen and (min-width: 470px) {
+    flex-wrap: nowrap;
+    margin: 30px 0;
+  }
   input {
     inline-size: 100%;
     border: none;
@@ -101,6 +107,10 @@ const Coupon = styled(motion.div)`
     font-size: 20px;
     font-weight: bold;
     color: #111;
+    block-size: 70px;
+    @media screen and (min-width: 470px) {
+      block-size: unset;
+    }
   }
   button {
     min-inline-size: 150px;

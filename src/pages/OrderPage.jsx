@@ -62,6 +62,7 @@ const Page = styled.div`
 const Wrapper = styled.div`
   inline-size: 100%;
   max-inline-size: 800px;
+  padding: 0 20px;
   h1 {
     margin: 0 0 40px;
     font-size: 40px;
