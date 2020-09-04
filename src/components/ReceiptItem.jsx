@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const ReceiptItem = () => {
+const ReceiptItem = ({ name, price, images, qty }) => {
+  console.log(name);
   return (
     <Item>
-      <Img style={{ backgroundImage: `url(name)` }} />
+      <Img style={{ backgroundImage: `url(${images.src.medium})` }} />
+
       <Info>
-        <p>Name</p>
-        <p>Price</p>
-        <p>Qty</p>
+        <p>Product: {name}</p>
+        <p>Price: {price}</p>
+        <p>Quantity:{qty}</p>
       </Info>
     </Item>
   );
@@ -20,23 +22,22 @@ const Item = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: #ececec;
-  padding: 20px;
+
   margin: 30px 0;
 `;
 const Img = styled.div`
-  inline-size: 50px;
-  block-size: 50px;
-  background-color: red;
+  inline-size: 150px;
+  block-size: 150px;
 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 `;
 const Info = styled.div`
-  background-color: green;
   inline-size: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-self: center;
   p {
     font-weight: bold;
   }

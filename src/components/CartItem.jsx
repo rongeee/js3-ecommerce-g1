@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 export const CartItem = ({ product }) => {
-  console.log(product);
+  // console.log(product);
 
   const getTotalPrice = () => {
     const price = product.price;

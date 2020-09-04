@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import ReceiptList from "../components/ReceiptList";
 
-const ReceiptPage = () => {
+const ReceiptPage = (props) => {
+  const orderId = props.match.params.id;
   return (
     <div>
       <Wrapper>
         <h1>Receipt</h1>
-        <ReceiptList />
-        <p>Total price</p>
+        <ReceiptList orderId={orderId} />
         <button>Continue shopping</button>
       </Wrapper>
     </div>

@@ -37,9 +37,16 @@ function App() {
           }}
         ></Route>
 
-        <Route path="/receipt">
-          <ReceiptPage />
-        </Route>
+        <Route
+          path="/receipt/:id"
+          render={(props) => {
+            return (
+              <LayoutDefault>
+                <ReceiptPage {...props} />
+              </LayoutDefault>
+            );
+          }}
+        ></Route>
         <Route path="/order">
           <LayoutDefault>
             <OrderPage />

@@ -1,10 +1,13 @@
 import React from "react";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const OrderForm = ({ totalPrice, discountPrice }) => {
   const { cart, setCart } = useContext(CartContext);
+  const [orderId, setOrderId] = useState({});
+
   const userInput = useRef();
   const discountInput = useRef();
 
@@ -18,7 +21,7 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
       price: discountPrice ? discountPrice : totalPrice,
     };
 
-    console.log(data);
+    // console.log(data);
     userInput.current.value = null;
     fetch(url, {
       method: "POST",
@@ -26,10 +29,12 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setCart({});
+        setOrderId(data.name);
       });
   }
+
+  // console.log(orderId);
   return (
     <InputWrapper>
       <InputDiv>
@@ -42,6 +47,7 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
       </InputDiv>
       <InputDiv>
         <SendOrderBtn onClick={handlePostOrder}>Send Order</SendOrderBtn>
+        <Link to={`../receipt/${orderId}`}>receipt</Link>
       </InputDiv>
     </InputWrapper>
   );
