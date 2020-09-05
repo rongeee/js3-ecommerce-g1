@@ -1,16 +1,16 @@
-import React from "react";
-import styled from "styled-components";
-import CartQtyBtn from "./CartQtyBtn";
+import React from "react"
+import styled from "styled-components"
+import CartQtyBtn from "./CartQtyBtn"
 
-import { CartDeleteProduct } from "./CartDeleteProduct";
+import { CartDeleteProduct } from "./CartDeleteProduct"
 
 export const CartItem = ({ product }) => {
   const getTotalPrice = () => {
-    const price = product.price;
-    const qty = product.qty;
+    const price = product.price
+    const qty = product.qty
 
-    return price * qty;
-  };
+    return price * qty
+  }
 
   return (
     <Container>
@@ -36,8 +36,8 @@ export const CartItem = ({ product }) => {
       </ProductInfo>
       <CartDeleteProduct productId={product.id} />
     </Container>
-  );
-};
+  )
+}
 
 const Container = styled.div`
   display: flex;
@@ -45,14 +45,14 @@ const Container = styled.div`
   margin-bottom: 5px;
   background-color: #fffaef;
   width: 100%;
-`;
+`
 
 const ProductImage = styled.img`
   object-fit: cover;
   height: 100%;
   width: 100%;
   border-radius: 10px;
-`;
+`
 
 const ProductInfo = styled.div`
   width: 100%;
@@ -60,17 +60,17 @@ const ProductInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 1em;
-`;
+`
 
 const PriceInfo = styled.div`
   display: flex;
   justify-content: space-between;
-`;
+`
 
 const ImageWrapper = styled.div`
   flex-basis: 250px;
-`;
+`
 
 const QtyContainer = styled.div`
   display: flex;
-`;
+`

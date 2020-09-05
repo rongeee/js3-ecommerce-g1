@@ -1,43 +1,35 @@
-import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import { CartContext } from "../context/CartContext";
-import { CartItem } from "./CartItem";
-import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
-import CartClearCart from "./CartClearCart";
+import React, { useContext, useEffect, useState } from "react"
+import styled from "styled-components"
+import { CartContext, TotalContext } from "../context/CartContext"
+import { CartItem } from "./CartItem"
+import { motion, AnimatePresence } from "framer-motion"
+import { Link } from "react-router-dom"
+import CartClearCart from "./CartClearCart"
 
-const containerVariants = {
-  initial: { opacity: 0, x: "100%" },
-  animate: { opacity: 1, x: 0, transition: { type: "tween" } },
-  exit: { opacity: 0, x: "100%", transition: { type: "tween" } },
-};
 
 export default function Cart() {
-  const { cart } = useContext(CartContext);
-  let [emptyCart, setEmptyCart] = useState(true);
+  const { cart } = useContext(CartContext)
+  const { total } = useContext(TotalContext)
+
+
+
+  let [emptyCart, setEmptyCart] = useState(true)
+
 
   useEffect(() => {
     return Object.entries(cart).length > 0
       ? setEmptyCart(false)
-      : setEmptyCart(true);
-  }, [cart]);
+      : setEmptyCart(true)
+  }, [cart])
 
-  const getTotalCartPrice = () => {
-    const cartArr = Object.keys(cart);
-    let totalPrice = 0;
 
-    cartArr.forEach(key => {
-      totalPrice += cart[key].qty * cart[key].price;
-    });
 
-    return totalPrice;
-  };
 
   const renderItems = () => {
     return Object.keys(cart).map(item => {
-      return <CartItem product={cart[item]} />;
-    });
-  };
+      return <CartItem product={cart[item]} />
+    })
+  }
 
   return (
     <AnimatePresence exitBeforeEnter>
@@ -53,18 +45,25 @@ export default function Cart() {
         {!emptyCart ? (
           <OrderContainer>
             <TotalPriceContainer>
-              <p>Total Price: {getTotalCartPrice()} SEK</p>
+              <p>Total Price: {total} SEK</p>
               <CartClearCart />
             </TotalPriceContainer>
             <MyLinkButton to={`/order`}>Go to order page</MyLinkButton>{" "}
           </OrderContainer>
         ) : (
-          ""
-        )}
+            ""
+          )}
       </Container>
     </AnimatePresence>
-  );
+  )
 }
+
+const containerVariants = {
+  initial: { opacity: 0, x: "100%" },
+  animate: { opacity: 1, x: 0, transition: { type: "tween" } },
+  exit: { opacity: 0, x: "100%", transition: { type: "tween" } },
+}
+
 
 const Container = styled(motion.div)`
   min-height: 100vh;
@@ -86,7 +85,7 @@ const Container = styled(motion.div)`
   @media (min-width: 800px) {
     width: 700px;
   }
-`;
+`
 const MyLinkButton = styled(Link)`
   background-color: #2e86c1;
   color: white;
@@ -95,7 +94,7 @@ const MyLinkButton = styled(Link)`
   text-decoration: none;
   display: inline-block;
   border-radius: 5px;
-`;
+`
 
 const OrderContainer = styled.div`
   display: flex;
@@ -104,13 +103,13 @@ const OrderContainer = styled.div`
   align-items: center;
   width: 100%;
   padding: 1em;
-`;
+`
 
 const TotalPriceContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding-bottom: 1em;
-`;
+`
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div``
