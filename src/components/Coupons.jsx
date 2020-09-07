@@ -6,7 +6,7 @@ import { TotalContext } from "../context/CartContext";
 const Coupons = ({ setDiscountPrice }) => {
   const [coupons, setCoupons] = useState({});
   let [couponMsg, setCouponMsg] = useState(null);
-  const { total, setTotal } = useContext(TotalContext);
+  const { total } = useContext(TotalContext);
 
   const url =
     "https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json";

@@ -1,73 +1,73 @@
-import React from "react"
-import { useContext, useRef, useState, useEffect } from "react"
-import { CartContext, TotalContext } from "../context/CartContext"
-import styled from "styled-components"
-import { motion } from "framer-motion"
-import { Redirect } from "react-router-dom"
+import React from "react";
+import { useContext, useRef, useState, useEffect } from "react";
+import { CartContext, TotalContext } from "../context/CartContext";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Redirect } from "react-router-dom";
 
-const OrderForm = ({ totalPrice, discountPrice }) => {
-  const { cart, setCart } = useContext(CartContext)
-  const [orderId, setOrderId] = useState({})
-  const [controlTotal, setControlTotal] = useState(undefined)
-  const { total, setTotal } = useContext(TotalContext)
-  const [postSuccess, setPostSuccess] = useState(false)
+const OrderForm = ({ discountPrice }) => {
+  const { cart, setCart } = useContext(CartContext);
+  const [orderId, setOrderId] = useState({});
+  const [controlTotal, setControlTotal] = useState(undefined);
+  const { total } = useContext(TotalContext);
+  const [postSuccess, setPostSuccess] = useState(false);
 
-  const userInput = useRef()
+  const userInput = useRef();
 
   const checkAgainstDB = () => {
-    const cartArr = Object.keys(cart)
-    let urls = cartArr.map((product) => {
-      return `https://mock-data-api.firebaseio.com/e-commerce/products/${product}.json`
-    })
-    fetchAll(urls)
-  }
+    const cartArr = Object.keys(cart);
+    let urls = cartArr.map(product => {
+      return `https://mock-data-api.firebaseio.com/e-commerce/products/${product}.json`;
+    });
+    fetchAll(urls);
+  };
 
   async function fetchAll(urls) {
     const results = await Promise.all(
-      urls.map((url) =>
+      urls.map(url =>
         fetch(url)
-          .then((r) => r.json())
-          .then((result) => {
-            return cart[result.id].qty * result.price
+          .then(r => r.json())
+          .then(result => {
+            return cart[result.id].qty * result.price;
           })
       )
-    )
-    let dbTotal = 0
-    results.forEach((res) => {
-      dbTotal += res
-    })
-    setControlTotal(dbTotal)
+    );
+    let dbTotal = 0;
+    results.forEach(res => {
+      dbTotal += res;
+    });
+    setControlTotal(dbTotal);
   }
 
   useEffect(() => {
     if (total === controlTotal) {
-      handlePostOrder()
+      handlePostOrder();
     } else {
-      console.log("stop")
+      console.log("stop");
     }
-  }, [controlTotal])
+  }, [controlTotal]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function handlePostOrder() {
     const url =
-      "https://mock-data-api.firebaseio.com/e-commerce/orders/group-1.json"
+      "https://mock-data-api.firebaseio.com/e-commerce/orders/group-1.json";
     const data = {
       name: userInput.current.value,
       products: cart,
       price: discountPrice ? discountPrice : total,
-    }
+    };
     // console.log(data);
-    userInput.current.value = null
+    userInput.current.value = null;
     fetch(url, {
       method: "POST",
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         // console.log(data);
-        setCart({})
-        setOrderId(data.name)
-        setPostSuccess(true)
-      })
+        setCart({});
+        setOrderId(data.name);
+        setPostSuccess(true);
+      });
   }
 
   // console.log(orderId);
@@ -92,17 +92,17 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
         <Redirect push to={{ pathname: `/receipt/${orderId}` }} />
       )}
     </InputWrapper>
-  )
-}
+  );
+};
 
-export default OrderForm
+export default OrderForm;
 const InputWrapper = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   flex-direction: column;
   justify-content: space-around; ;
-`
+`;
 
 const NameForm = styled.div`
   display: flex;
@@ -147,4 +147,4 @@ const NameForm = styled.div`
       box-shadow: 0px 3px 20px rgba(30, 234, 172, 0.4);
     }
   }
-`
+`;

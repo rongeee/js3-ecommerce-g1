@@ -30,7 +30,7 @@ const ReceiptList = ({ orderId }) => {
 
   useEffect(() => {
     getReceipt();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <List>
