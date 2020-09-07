@@ -13,13 +13,14 @@ const OrderItems = ({ product, delayIndex }) => {
         <ProductImage
           src={product.images.src.small}
           alt={product.images.alt}
+          whileHover={{ scale: 1.2 }}
         ></ProductImage>
       </ImageWrapper>
 
       <ProductInfo>
         <h4>{product.name}</h4>
         <p>
-          Amount: {product.qty} x {product.price} SEK
+          {product.qty} x {product.price} SEK
         </p>
       </ProductInfo>
     </Container>
@@ -49,7 +50,7 @@ const ImageWrapper = styled.div`
     max-width: 200px;
   }
 `;
-const ProductImage = styled.img`
+const ProductImage = styled(motion.img)`
   object-fit: cover;
   height: 100%;
   width: 100%;
@@ -57,41 +58,36 @@ const ProductImage = styled.img`
 
 const ProductInfo = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   flex: 1;
   font-weight: bold;
   padding: 0 0 0 20px;
   h4 {
-    font-size: 20px;
-    margin: 15px 0 15px;
+    font-size: 16px;
+    margin: 0 0 16px;
   }
   p {
     font-size: 16px;
-
-    margin: 0 0 15px;
+    min-inline-size: 100px;
+    align-self: flex-end;
   }
-  @media screen and (min-width: 450px) {
+  @media screen and (min-width: 500px) {
     h4 {
-      font-size: 26px;
-      margin: 30px 0 15px;
+      font-size: 20px;
     }
     p {
       font-size: 18px;
       align-self: flex-end;
-      margin: 0 0 30px;
     }
   }
   @media screen and (min-width: 590px) {
     h4 {
-      margin: 0 30px 0 0;
-      font-size: 30px;
-      margin: 30px 0 0;
+      font-size: 24px;
     }
     p {
       font-size: 20px;
       align-self: flex-end;
-      margin: 0 0 30px;
     }
   }
 `;

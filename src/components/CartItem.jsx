@@ -1,16 +1,17 @@
-import React from "react"
-import styled from "styled-components"
-import CartQtyBtn from "./CartQtyBtn"
+import React from "react";
+import styled from "styled-components";
+import CartQtyBtn from "./CartQtyBtn";
+import { motion } from "framer-motion";
 
-import { CartDeleteProduct } from "./CartDeleteProduct"
+import { CartDeleteProduct } from "./CartDeleteProduct";
 
 export const CartItem = ({ product }) => {
   const getTotalPrice = () => {
-    const price = product.price
-    const qty = product.qty
+    const price = product.price;
+    const qty = product.qty;
 
-    return price * qty
-  }
+    return price * qty;
+  };
 
   return (
     <Container>
@@ -18,41 +19,48 @@ export const CartItem = ({ product }) => {
         <ProductImage
           src={product.images.src.small}
           alt={product.images.alt}
+          whileHover={{ scale: 1.2 }}
         ></ProductImage>
       </ImageWrapper>
       <ProductInfo>
         <h4>{product.name}</h4>
         <PriceInfo>
           <p>
-            Amount: {product.qty} x {product.price} SEK
+            Amount: {product.qty} x {product.price}:-/st.
           </p>
 
-          <p>{getTotalPrice()} SEK</p>
+          <CurTotalPrice>{getTotalPrice()} SEK</CurTotalPrice>
         </PriceInfo>
         <QtyContainer>
           <CartQtyBtn value={-1} product={product} action={"-"} />
-          <CartQtyBtn value={1} product={product} action={"+"} />
+          <CartQtyBtn plus value={1} product={product} action={"+"} />
         </QtyContainer>
       </ProductInfo>
       <CartDeleteProduct productId={product.id} />
     </Container>
-  )
-}
+  );
+};
 
 const Container = styled.div`
   display: flex;
-  box-shadow: inset 0px -2px 7px 0px rgba(0, 0, 0, 0.18);
+  align-items: center;
   margin-bottom: 5px;
-  background-color: #fffaef;
-  width: 100%;
-`
+  inline-size: 100%;
+`;
 
-const ProductImage = styled.img`
+const ImageWrapper = styled.div`
+  inline-size: 100px;
+  min-inline-size: 100px;
+  block-size: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+`;
+
+const ProductImage = styled(motion.img)`
   object-fit: cover;
   height: 100%;
   width: 100%;
-  border-radius: 10px;
-`
+`;
 
 const ProductInfo = styled.div`
   width: 100%;
@@ -60,17 +68,19 @@ const ProductInfo = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 1em;
-`
+`;
 
 const PriceInfo = styled.div`
   display: flex;
   justify-content: space-between;
-`
-
-const ImageWrapper = styled.div`
-  flex-basis: 250px;
-`
+`;
+const CurTotalPrice = styled.p`
+  font-weight: bold;
+`;
 
 const QtyContainer = styled.div`
   display: flex;
-`
+  justify-content: space-between;
+  inline-size: 100%;
+  max-inline-size: 100px;
+`;

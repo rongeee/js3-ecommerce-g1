@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { CartContext } from "../context/CartContext";
 import { addQty, addToCart } from "../cart.utils";
+import { motion } from "framer-motion";
 
 export const AddButton = ({ myProps }) => {
   const { cart, setCart } = useContext(CartContext);
@@ -17,10 +18,14 @@ export const AddButton = ({ myProps }) => {
       addToCart(setCart, product, id, stock);
     }
   };
-  return <Btn onClick={handleClick}>Add to cart</Btn>;
+  return (
+    <Btn onClick={handleClick} whileTap={{ scale: 0.92 }}>
+      Add to cart
+    </Btn>
+  );
 };
 
-const Btn = styled.button`
+const Btn = styled(motion.button)`
   background-color: #2e86c1;
   color: white;
   padding: 14px 25px;
@@ -32,6 +37,7 @@ const Btn = styled.button`
   transition: all 0.1s;
   border: none;
   font-weight: bold;
+  outline: none;
 
   &:hover {
     background: #2b2bff;

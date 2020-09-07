@@ -4,6 +4,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import CartIkon from "./images/cart.png";
+import { AnimatePresence } from "framer-motion";
 
 const LayoutDefault = ({ children }) => {
   const [isHidden, setIsHidden] = useState(true);
@@ -21,10 +22,10 @@ const LayoutDefault = ({ children }) => {
             <MyLink to={`/`}>Home</MyLink>
           </Logowrapper>
 
-          <Image onClick={handleClick} src={CartIkon} alt="" />
+          <CartBtn onClick={handleClick} src={CartIkon} alt="" />
         </Nav>
       </header>
-      {!isHidden && <Cart />}
+      <AnimatePresence exitBeforeEnter>{!isHidden && <Cart />}</AnimatePresence>
       <Main>{children}</Main>
       <Footer>
         <FooterTextWrapper>
@@ -51,13 +52,12 @@ const Nav = styled.nav`
   display: flex;
   position: fixed;
   z-index: 2;
-  margin: 0;
+
   width: 100%;
   justify-content: space-between;
-  background-color: #ffffff;
-  border-bottom: 1px solid #d7dbdd;
-  box-shadow: 2px 2px 1px rgba(229, 231, 233, 0.75);
-  padding: 1em 3em;
+  background-color: #fff;
+  box-shadow: 5px 5px 10px 5px rgba(189, 195, 199, 0.2);
+  padding: 16px 20px;
 `;
 
 const Main = styled.main`
@@ -74,9 +74,10 @@ const MyLink = styled(Link)`
 const Logowrapper = styled.div`
   display: flex;
 `;
-const Image = styled.img`
-  width: 40px;
-  height: 40px;
+const CartBtn = styled.img`
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 `;
 
 const Footer = styled.footer`
