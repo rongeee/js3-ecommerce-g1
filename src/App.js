@@ -10,7 +10,7 @@ import OrderPage from "./pages/OrderPage"
 function App() {
   const [cart, setCart] = useState({})
   const [total, setTotal] = useState(0)
-
+  const [stateCart, setStateCart] = useState({})
 
   useEffect(() => {
     const storageCart = JSON.parse(localStorage.getItem("cart"))
@@ -27,7 +27,7 @@ function App() {
     // this useEffect makes sure that the total price is calculated with prices from the api
     const cartArr = Object.keys(cart)
     let calcTotal = 0
-    cartArr.forEach(product => {
+    cartArr.forEach((product) => {
       const url = `https://mock-data-api.firebaseio.com/e-commerce/products/${product}.json`
       fetch(url)
         .then((res) => res.json())
