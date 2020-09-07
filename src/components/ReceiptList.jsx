@@ -36,6 +36,7 @@ const ReceiptList = ({ orderId }) => {
     <List>
       <h1>Buyer: {order.name}</h1>
       <ul>{renderReciptList()}</ul>
+      <TotalPrice>{order.price}SEK</TotalPrice>
     </List>
   );
 };
@@ -45,4 +46,9 @@ export default ReceiptList;
 const List = styled.div`
   inline-size: 100%;
   padding: 0 20px;
+`;
+const TotalPrice = styled.p`
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
 `;

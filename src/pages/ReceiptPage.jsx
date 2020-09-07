@@ -11,7 +11,7 @@ const ReceiptPage = props => {
       <Wrapper>
         <h1>Receipt</h1>
         <ReceiptList orderId={orderId} />
-        <Link to="">
+        <Link to="/">
           <Btn>Continue shopping</Btn>
         </Link>
       </Wrapper>

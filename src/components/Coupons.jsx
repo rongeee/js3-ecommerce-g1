@@ -1,10 +1,13 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { TotalContext } from "../context/CartContext";
 
-const Coupons = ({ setDiscountPrice, totalPrice }) => {
+const Coupons = ({ setDiscountPrice }) => {
   const [coupons, setCoupons] = useState({});
   let [couponMsg, setCouponMsg] = useState(null);
+  const { total, setTotal } = useContext(TotalContext);
+
   const url =
     "https://mock-data-api.firebaseio.com/e-commerce/couponCodes.json";
 
@@ -53,7 +56,7 @@ const Coupons = ({ setDiscountPrice, totalPrice }) => {
   };
 
   const giveDiscount = currentCoupon => {
-    let tempPrice = Math.round(totalPrice * coupons[currentCoupon].discount);
+    let tempPrice = Math.round(total * coupons[currentCoupon].discount);
 
     setDiscountPrice(tempPrice);
   };
