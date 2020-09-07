@@ -11,7 +11,6 @@ function App() {
   const [cart, setCart] = useState({})
   const [total, setTotal] = useState(0)
 
-
   useEffect(() => {
     const storageCart = JSON.parse(localStorage.getItem("cart"))
     if (storageCart) {
@@ -24,22 +23,12 @@ function App() {
   }, [cart])
 
   useEffect(() => {
-    // this useEffect makes sure that the total price is calculated with prices from the api
-    const cartArr = Object.keys(cart)
-    let calcTotal = 0
-    cartArr.forEach(product => {
-      const url = `https://mock-data-api.firebaseio.com/e-commerce/products/${product}.json`
-      fetch(url)
-        .then((res) => res.json())
-        .then((result) => {
-          if (cart[product]) {
-            calcTotal += cart[product].qty * result.price
-            setTotal(calcTotal)
-          }
-        })
+    let tempTotal = 0
+    Object.keys(cart).map((product) => {
+      tempTotal += cart[product].price * cart[product].qty
     })
+    setTotal(tempTotal)
   }, [cart])
-
   return (
     <CartContext.Provider value={{ cart, setCart }}>
       <TotalContext.Provider value={{ total, setTotal }}>

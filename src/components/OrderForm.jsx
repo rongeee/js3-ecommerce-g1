@@ -1,40 +1,66 @@
-import React from "react";
-import { useContext, useRef, useState } from "react";
-import { CartContext } from "../context/CartContext";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import { Redirect } from "react-router-dom";
+import React from "react"
+import { useContext, useRef, useState, useEffect } from "react"
+import { CartContext, TotalContext } from "../context/CartContext"
+import styled from "styled-components"
+import { motion } from "framer-motion"
+import { Redirect } from "react-router-dom"
 
 const OrderForm = ({ totalPrice, discountPrice }) => {
-  const { cart, setCart } = useContext(CartContext);
-  const [orderId, setOrderId] = useState({});
-  const [postSuccess, setPostSuccess] = useState(false);
+  const { cart, setCart } = useContext(CartContext)
+  const [orderId, setOrderId] = useState({})
+  const [controlTotal, setControlTotal] = useState(null)
+  const { total, setTotal } = useContext(TotalContext)
+  const [postSuccess, setPostSuccess] = useState(false)
 
-  const userInput = useRef();
+  const userInput = useRef()
+
+  const checkAgainstDB = () => {
+    const cartArr = Object.keys(cart)
+    let calcTotal = 0
+    cartArr.forEach((product, i) => {
+      const url = `https://mock-data-api.firebaseio.com/e-commerce/products/${product}.json`
+      fetch(url)
+        .then((res) => res.json())
+        .then((result) => {
+          if (cart[product]) {
+            calcTotal += cart[product].qty * result.price
+            setControlTotal(calcTotal)
+          }
+        })
+    })
+  }
+
+  useEffect(() => {
+    if (total === controlTotal) {
+      setTotal(controlTotal)
+      handlePostOrder()
+    } else {
+      setTotal(controlTotal)
+    }
+  }, [controlTotal])
 
   function handlePostOrder() {
-    const url =
-      "https://mock-data-api.firebaseio.com/e-commerce/orders/group-1.json";
-
-    const data = {
-      name: userInput.current.value,
-      products: cart,
-      price: discountPrice ? discountPrice : totalPrice,
-    };
-
-    // console.log(data);
-    userInput.current.value = null;
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(data),
-    })
-      .then(res => res.json())
-      .then(data => {
-        // console.log(data);
-        setCart({});
-        setOrderId(data.name);
-        setPostSuccess(true);
-      });
+    console.log(total)
+    // const url =
+    //   "https://mock-data-api.firebaseio.com/e-commerce/orders/group-1.json"
+    // const data = {
+    //   name: userInput.current.value,
+    //   products: cart,
+    //   price: discountPrice ? discountPrice : totalPrice,
+    // }
+    // // console.log(data);
+    // userInput.current.value = null
+    // fetch(url, {
+    //   method: "POST",
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // console.log(data);
+    //     setCart({})
+    //     setOrderId(data.name)
+    //     setPostSuccess(true)
+    //   })
   }
 
   // console.log(orderId);
@@ -48,7 +74,7 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
         <input type="text" ref={userInput} placeholder="Enter your name here" />
 
         <motion.button
-          onClick={handlePostOrder}
+          onClick={checkAgainstDB}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -59,17 +85,17 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
         <Redirect push to={{ pathname: `/receipt/${orderId}` }} />
       )}
     </InputWrapper>
-  );
-};
+  )
+}
 
-export default OrderForm;
+export default OrderForm
 const InputWrapper = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   flex-direction: column;
   justify-content: space-around; ;
-`;
+`
 
 const NameForm = styled.div`
   display: flex;
@@ -114,4 +140,4 @@ const NameForm = styled.div`
       box-shadow: 0px 3px 20px rgba(30, 234, 172, 0.4);
     }
   }
-`;
+`
