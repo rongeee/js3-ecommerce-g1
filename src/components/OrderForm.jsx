@@ -30,7 +30,7 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+        // console.log(data);
         setCart({});
         setOrderId(data.name);
         setPostSuccess(true);

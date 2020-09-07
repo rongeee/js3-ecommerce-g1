@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import ReceiptList from "../components/ReceiptList";
 
-const ReceiptPage = (props) => {
+const ReceiptPage = props => {
   const orderId = props.match.params.id;
+  // console.log(orderId);
   return (
     <div>
       <Wrapper>
