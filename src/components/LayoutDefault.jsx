@@ -19,13 +19,15 @@ const LayoutDefault = ({ children }) => {
         <Nav>
           <Logowrapper>
             {/* <img alt="Logo" src="" /> */}
-            <MyLink to={`/`}>Home</MyLink>
+            <MyLink to="/">Home</MyLink>
           </Logowrapper>
 
           <CartBtn onClick={handleClick} src={CartIkon} alt="" />
         </Nav>
       </header>
-      <AnimatePresence exitBeforeEnter>{!isHidden && <Cart />}</AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
+        {!isHidden && <Cart isHidden={isHidden} setIsHidden={setIsHidden} />}
+      </AnimatePresence>
       <Main>{children}</Main>
       <Footer>
         <FooterTextWrapper>

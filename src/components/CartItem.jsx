@@ -26,7 +26,7 @@ export const CartItem = ({ product }) => {
         <h4>{product.name}</h4>
         <PriceInfo>
           <p>
-            Amount: {product.qty} x {product.price}:-/st.
+            {product.qty} x {product.price}:-/st.
           </p>
 
           <CurTotalPrice>{getTotalPrice()} SEK</CurTotalPrice>

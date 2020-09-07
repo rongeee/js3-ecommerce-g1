@@ -12,7 +12,7 @@ const containerVariants = {
   exit: { x: "100%", transition: { type: "tween", duration: 0.2 } },
 };
 
-export default function Cart() {
+export default function Cart({ isHidden, setIsHidden }) {
   const { cart } = useContext(CartContext);
   const { total } = useContext(TotalContext);
 
@@ -28,6 +28,10 @@ export default function Cart() {
     return Object.keys(cart).map(item => {
       return <CartItem product={cart[item]} />;
     });
+  };
+
+  const handleClick = () => {
+    setIsHidden(!isHidden);
   };
 
   return (
@@ -46,7 +50,9 @@ export default function Cart() {
             <p>Total Price: {total} SEK</p>
             <CartClearCart />
           </TotalPriceContainer>
-          <MyLinkButton to={`/order`}>Go to order page</MyLinkButton>
+          <MyLinkButton onClick={handleClick} to={`/order`}>
+            Go to order page
+          </MyLinkButton>
         </OrderContainer>
       ) : (
         ""
@@ -79,6 +85,7 @@ const Container = styled(motion.div)`
 
 const Wrapper = styled.div`
   padding: 0 20px;
+  inline-size: 100%;
 `;
 
 const MyLinkButton = styled(Link)`

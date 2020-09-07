@@ -3,11 +3,12 @@ import { useContext, useRef, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const OrderForm = ({ totalPrice, discountPrice }) => {
   const { cart, setCart } = useContext(CartContext);
   const [orderId, setOrderId] = useState({});
+  const [postSuccess, setPostSuccess] = useState(false);
 
   const userInput = useRef();
 
@@ -27,11 +28,12 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
       method: "POST",
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         console.log(data);
         setCart({});
         setOrderId(data.name);
+        setPostSuccess(true);
       });
   }
 
@@ -44,22 +46,23 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
     >
       <NameForm>
         <input type="text" ref={userInput} placeholder="Enter your name here" />
-        <Link to="/receipt">
-          <motion.button
-            onClick={handlePostOrder}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            Order
-          </motion.button>
-        </Link>
+
+        <motion.button
+          onClick={handlePostOrder}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          Order
+        </motion.button>
       </NameForm>
+      {postSuccess && (
+        <Redirect push to={{ pathname: `/receipt/${orderId}` }} />
+      )}
     </InputWrapper>
   );
 };
 
 export default OrderForm;
-
 const InputWrapper = styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
