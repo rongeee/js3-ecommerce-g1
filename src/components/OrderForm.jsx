@@ -8,7 +8,7 @@ import { Redirect } from "react-router-dom"
 const OrderForm = ({ totalPrice, discountPrice }) => {
   const { cart, setCart } = useContext(CartContext)
   const [orderId, setOrderId] = useState({})
-  const [controlTotal, setControlTotal] = useState(null)
+  const [controlTotal, setControlTotal] = useState(undefined)
   const { total, setTotal } = useContext(TotalContext)
   const [postSuccess, setPostSuccess] = useState(false)
 
@@ -16,51 +16,58 @@ const OrderForm = ({ totalPrice, discountPrice }) => {
 
   const checkAgainstDB = () => {
     const cartArr = Object.keys(cart)
-    let calcTotal = 0
-    cartArr.forEach((product, i) => {
-      const url = `https://mock-data-api.firebaseio.com/e-commerce/products/${product}.json`
-      fetch(url)
-        .then((res) => res.json())
-        .then((result) => {
-          if (cart[product]) {
-            calcTotal += cart[product].qty * result.price
-            setControlTotal(calcTotal)
-          }
-        })
+    let urls = cartArr.map((product) => {
+      return `https://mock-data-api.firebaseio.com/e-commerce/products/${product}.json`
     })
+    fetchAll(urls)
+  }
+
+  async function fetchAll(urls) {
+    const results = await Promise.all(
+      urls.map((url) =>
+        fetch(url)
+          .then((r) => r.json())
+          .then((result) => {
+            return cart[result.id].qty * result.price
+          })
+      )
+    )
+    let dbTotal = 0
+    results.forEach((res) => {
+      dbTotal += res
+    })
+    setControlTotal(dbTotal)
   }
 
   useEffect(() => {
     if (total === controlTotal) {
-      setTotal(controlTotal)
       handlePostOrder()
     } else {
-      setTotal(controlTotal)
+      console.log("stop")
     }
   }, [controlTotal])
 
   function handlePostOrder() {
-    console.log(total)
-    // const url =
-    //   "https://mock-data-api.firebaseio.com/e-commerce/orders/group-1.json"
-    // const data = {
-    //   name: userInput.current.value,
-    //   products: cart,
-    //   price: discountPrice ? discountPrice : totalPrice,
-    // }
-    // // console.log(data);
-    // userInput.current.value = null
-    // fetch(url, {
-    //   method: "POST",
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     // console.log(data);
-    //     setCart({})
-    //     setOrderId(data.name)
-    //     setPostSuccess(true)
-    //   })
+    const url =
+      "https://mock-data-api.firebaseio.com/e-commerce/orders/group-1.json"
+    const data = {
+      name: userInput.current.value,
+      products: cart,
+      price: discountPrice ? discountPrice : total,
+    }
+    // console.log(data);
+    userInput.current.value = null
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        setCart({})
+        setOrderId(data.name)
+        setPostSuccess(true)
+      })
   }
 
   // console.log(orderId);
