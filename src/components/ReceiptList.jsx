@@ -4,25 +4,28 @@ import styled from "styled-components";
 
 const ReceiptList = ({ orderId }) => {
   const [order, setOrder] = useState({});
+  const products = order;
   const url = `https://mock-data-api.firebaseio.com/e-commerce/orders/group-1/${orderId}.json`;
-  // console.log(products);
+  console.log(products);
   const getReceipt = () => {
     fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        // console.log(data);
+      .then((res) => res.json())
+      .then((data) => {
         setOrder(data);
       });
   };
 
-  console.log(Object.values(order)[1]);
-  const payloadBuyer = Object.values(order)[0];
-  const payloadOrderedItemListObj = Object.values(order)[1];
-
   const renderReciptList = () => {
-    // payloadOrderedItemListArr.map(item => {
-    //   console.log("janis");
-    // });
+    return Object.entries(products)
+      .slice(1)
+      .map((key, i) => {
+        // console.log(key[1]);
+        return Object.entries(key[1]).map((item, y) => {
+          const productInfo = item[1];
+          // console.log(productInfo);
+          return <ReceiptItem key={y} {...productInfo} />;
+        });
+      });
   };
 
   useEffect(() => {
@@ -31,7 +34,7 @@ const ReceiptList = ({ orderId }) => {
 
   return (
     <List>
-      <h1>Buyer: {payloadBuyer}</h1>
+      <h1>Buyer: {order.name}</h1>
       <ul>{renderReciptList()}</ul>
     </List>
   );
