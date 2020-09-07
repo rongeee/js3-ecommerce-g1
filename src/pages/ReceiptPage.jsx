@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ReceiptList from "../components/ReceiptList";
+import { Link } from "react-router-dom";
 
 const ReceiptPage = props => {
   const orderId = props.match.params.id;
@@ -10,7 +11,9 @@ const ReceiptPage = props => {
       <Wrapper>
         <h1>Receipt</h1>
         <ReceiptList orderId={orderId} />
-        <button>Continue shopping</button>
+        <Link to="">
+          <Btn>Continue shopping</Btn>
+        </Link>
       </Wrapper>
     </div>
   );
@@ -29,4 +32,12 @@ const Wrapper = styled.div`
   h1 {
     font-weight: 900;
   }
+`;
+const Btn = styled.button`
+  margin: 30px 0;
+  background-color: #1eeaac;
+  color: #111;
+  padding: 15px 30px;
+  border-radius: 7px;
+  font-weight: bold;
 `;

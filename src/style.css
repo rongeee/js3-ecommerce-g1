@@ -13,4 +13,6 @@ button {
   outline: none;
   cursor: pointer;
   background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
 }

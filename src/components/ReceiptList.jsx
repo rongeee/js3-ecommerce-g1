@@ -9,8 +9,8 @@ const ReceiptList = ({ orderId }) => {
   console.log(products);
   const getReceipt = () => {
     fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setOrder(data);
       });
   };
@@ -44,4 +44,5 @@ export default ReceiptList;
 
 const List = styled.div`
   inline-size: 100%;
+  padding: 0 20px;
 `;

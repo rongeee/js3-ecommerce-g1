@@ -26,8 +26,8 @@ const ProductList = () => {
     const url = PRODUCTS_URL;
 
     fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         setProducts(data);
       });
   };

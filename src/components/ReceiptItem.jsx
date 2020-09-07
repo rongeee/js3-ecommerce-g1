@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
 const ReceiptItem = ({ name, price, images, qty }) => {
   console.log(name);
@@ -8,9 +9,9 @@ const ReceiptItem = ({ name, price, images, qty }) => {
       <Img style={{ backgroundImage: `url(${images.src.medium})` }} />
 
       <Info>
-        <p>Product: {name}</p>
-        <p>Price: {price}</p>
-        <p>Quantity:{qty}</p>
+        <p>{name}</p>
+        <p>{price} SEK</p>
+        <p>Qty:{qty}</p>
       </Info>
     </Item>
   );
@@ -21,17 +22,19 @@ export default ReceiptItem;
 const Item = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: #ececec;
+  /* background-color: #ececec; */
 
   margin: 30px 0;
 `;
 const Img = styled.div`
-  inline-size: 150px;
-  block-size: 150px;
+  inline-size: 100px;
+  min-inline-size: 100px;
+  block-size: 100px;
 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: 10px;
 `;
 const Info = styled.div`
   inline-size: 100%;
